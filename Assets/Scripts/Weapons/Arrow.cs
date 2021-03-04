@@ -26,7 +26,8 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            disableRotation = true; 
+            this.transform.parent = collision.transform;
+            disableRotation = true;
             rb.isKinematic = true;
             bx.isTrigger = true;
         }
