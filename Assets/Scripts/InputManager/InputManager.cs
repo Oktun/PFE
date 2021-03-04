@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour {
 
 	//Create Keycodes that will be associated with each of our commands.
 	//These can be accessed by any other script in our game
-	public KeyCode iKey {get; set;}
+	public KeyCode InventoryKey {get; set;}
 	public KeyCode mKey {get; set;}
 	public KeyCode hKey {get; set;}
 	public KeyCode forward {get; set;}
@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour {
 		 * are assigned to each Keycode via the second parameter
 		 * of the GetString() function
 		 */
-		iKey = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("inventoryKey", "I"));
+		InventoryKey = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("inventoryKey", "I"));
 		hKey = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("healKey", "H"));
 		mKey = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("mapKey", "M"));
 		forward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "Z"));
@@ -45,15 +45,5 @@ public class InputManager : MonoBehaviour {
 		left = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "Q"));
 		right = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
 
-	}
-
-	void Start () 
-	{
-	
-	}
-
-	void Update () 
-	{
-	
 	}
 }

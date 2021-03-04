@@ -38,7 +38,7 @@ public class MenuScript : MonoBehaviour {
 			else if(menuPanel.GetChild(i).name == "RightKey")
 				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.right.ToString();
 			else if(menuPanel.GetChild(i).name == "InventoryKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.iKey.ToString();
+				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.InventoryKey.ToString();
 			else if(menuPanel.GetChild(i).name == "MapKey")
 				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.mKey.ToString();
 			else if(menuPanel.GetChild(i).name == "HealKey")
@@ -141,9 +141,9 @@ public class MenuScript : MonoBehaviour {
 			PlayerPrefs.SetString("rightKey", InputManager.IM.right.ToString()); //save new key to playerprefs
 			break;
 		case "iKey":
-			InputManager.IM.iKey = newKey; //set jump to new keycode
-			buttonText.text = InputManager.IM.iKey.ToString(); //set button text to new key
-			PlayerPrefs.SetString("inventoryKey", InputManager.IM.iKey.ToString()); //save new key to playerprefs
+			InputManager.IM.InventoryKey = newKey; //set jump to new keycode
+			buttonText.text = InputManager.IM.InventoryKey.ToString(); //set button text to new key
+			PlayerPrefs.SetString("inventoryKey", InputManager.IM.InventoryKey.ToString()); //save new key to playerprefs
 			break;
 		case "mKey":
 			InputManager.IM.mKey = newKey; //set jump to new keycode

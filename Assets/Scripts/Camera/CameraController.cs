@@ -71,12 +71,7 @@ public class CameraController : MonoBehaviour
         HandleCollision();
     }
 
-
-    private void FixedUpdate()
-    {
-        RotateCamera();
-        
-    }
+    private void FixedUpdate () => RotateCamera();
 
     private void LateUpdate()
     {

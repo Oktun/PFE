@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using DivinityGaz.InventorySystem;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Movement))]
@@ -92,18 +94,9 @@ public class InputSystem : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         
         //Cursor visibilty
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
-
-    private void FixedUpdate()
-    {
-        if (Input.GetAxis(input.forwardInput) != 0 || Input.GetAxis(input.strafedInput) != 0 || isAiming)
-        {
-            RotateToCamView();
-        }
-    }
-
 
     void Update()
     {
@@ -123,11 +116,6 @@ public class InputSystem : MonoBehaviour
         {
             SwitchSatesFunction(2);
         }
-
-        /*if (Input.GetAxis(input.forwardInput) != 0 || Input.GetAxis(input.strafedInput) != 0 || isAiming)
-        {
-            RotateToCamView();
-        }*/
 
         // exprimation
         Move();
@@ -191,10 +179,10 @@ public class InputSystem : MonoBehaviour
     {
         bool movedYThisFrame = false;
         bool movedXThisFrame = false;
-        bool leftArrow = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(InputManager.IM.left);
-        bool rightArrow = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(InputManager.IM.right);
-        bool upArrow = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(InputManager.IM.forward);
-        bool downArrow = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(InputManager.IM.backward);
+        bool leftArrow = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Q);
+        bool rightArrow = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
+        bool upArrow = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z);
+        bool downArrow = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
 
         if (upArrow)
         {
@@ -219,6 +207,14 @@ public class InputSystem : MonoBehaviour
 
         inputVector.x = FixAxis(inputVector.x, movedXThisFrame);
         inputVector.y = FixAxis(inputVector.y, movedYThisFrame);
+    }
+
+    private void FixedUpdate ()
+    {
+        if (Input.GetAxis(input.forwardInput) != 0 || Input.GetAxis(input.strafedInput) != 0 || isAiming)
+        {
+            RotateToCamView();
+        }
     }
 
     private float FixAxis(float delta, bool state)
@@ -322,6 +318,20 @@ public class InputSystem : MonoBehaviour
 
     [SerializeField] DefaultWeapon[] weapons = new DefaultWeapon[3];
     public int equipedSlot = 0;
+
+    public void SwitchSatesFunction(WeaponItem weaponItem)
+    {
+        if (weapons[equipedSlot] == weaponItem) { return; }
+
+        for(int i = 0; i < weapons.Length; i++)
+        {
+            if (weapons[i] == weaponItem)
+            {
+                SwitchSatesFunction(i);
+                break;
+            }
+        }
+    }
 
     private void SwitchSatesFunction(int index)
     {
