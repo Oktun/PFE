@@ -12,6 +12,9 @@ public class MeleeEnemy : Enemy {
     bool isAttacking = false;
     [SerializeField] private int attackDamage;
 
+    private float timer = 0f;
+    private float waitTime = 4f;
+
     protected override void OnDrawGizmos () {
         base.OnDrawGizmos();
 
@@ -51,11 +54,15 @@ public class MeleeEnemy : Enemy {
     }
 
     protected override void OverWatch () {
-        meshAgentComponent.isStopped = true;
-        animationHandler.TriggerIdleAnimation();
+        base.OverWatch();
 
-        if (OverLap(detectionRange, out tragetDetected)) {
-            currentState = AIState.Attack;
+        if (timer >= waitTime)
+        {
+            timer = 0f;
+            currentState = AIState.Patrol;
+        } else
+        {
+            timer += Time.deltaTime;
         }
     }
 

@@ -43,9 +43,9 @@ public class AIAnimationHandler : MonoBehaviour
     }
 
     public void TriggerAttackAnimation (bool state) {
-        
+        animatorReference.SetBool("Run", false);
         animatorReference.SetBool("Attack", state);
-
+        
     }
 
     public void TriggerAimAnimation () {
