@@ -46,13 +46,13 @@ namespace DivinityGaz.InventorySystem
             }
         }
 
-        public void OnPointerEnter (PointerEventData eventData)
+        public virtual void OnPointerEnter (PointerEventData eventData)
         {
             // event
             isHovering = true;
         }
 
-        public void OnPointerExit (PointerEventData eventData)
+        public virtual void OnPointerExit (PointerEventData eventData)
         {
             // event
             isHovering = false;

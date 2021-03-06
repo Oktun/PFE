@@ -14,6 +14,9 @@ namespace DivinityGaz.InventorySystem
         [Header("UI Settings")]
         [SerializeField] private Transform slotsContainer = null;
         [SerializeField] private List<InventorySlot> inventorySlotsUI = new List<InventorySlot>();
+
+        [SerializeField] private ItemHandler itemHandler = null;
+        public ItemHandler ItemHandler { get { return itemHandler; } }
         
         public Inventory Inventory { get => inventory; }
 
