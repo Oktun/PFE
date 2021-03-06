@@ -27,7 +27,13 @@ namespace DivinityGaz.InventorySystem
         public override void OnPointerEnter (PointerEventData eventData)
         {
             base.OnPointerEnter(eventData);
-            ((InventorySlot)ItemSlotUI).Handler.ItemHandler.DisplayItem(itemSlotUI.SlotItem, ItemSlotUI.SlotIndex);
+            ((InventorySlot)ItemSlotUI).Handler.ItemHandler.DisplayItem((InventoryItem)itemSlotUI.SlotItem, ItemSlotUI.SlotIndex);
+        }
+
+        public override void OnPointerExit (PointerEventData eventData)
+        {
+            base.OnPointerEnter(eventData);
+            ((InventorySlot)ItemSlotUI).Handler.ItemHandler.DisableDisplay();
         }
     }
 }

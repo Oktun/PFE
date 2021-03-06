@@ -182,10 +182,11 @@ public abstract class Enemy : MonoBehaviour {
         meshAgentComponent.speed = walkingSpeed;
 
         if (meshAgentComponent.hasPath == false) {
-            animationHandler.TriggerIdleAnimation();
             if (meshAgentComponent.pathPending == false) {
+                animationHandler.TriggerIdleAnimation();
                 currentWayPointIndex++;
                 currentWayPointIndex %= wayPoints.Count;
+                currentState = AIState.OverWatch;
             }
         } else {
             animationHandler.TriggerWalkAnimation();
