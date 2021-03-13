@@ -14,7 +14,7 @@ namespace DivinityGaz.Interactables
         [SerializeField] private StringEvent onEnterInteract = null;
         [SerializeField] private VoidEvent onExitInteract = null;
 
-        public void interact (GameObject other)
+        public void Interact (GameObject other)
         {
             if (other.TryGetComponent(out IItemContainer itemContainer))
             {

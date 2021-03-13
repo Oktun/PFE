@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 
 namespace DivinityGaz.Interactables
@@ -9,6 +10,7 @@ namespace DivinityGaz.Interactables
         [SerializeField] private KeyCode interactionKey = KeyCode.E;
         [SerializeField] private float interactionRange = 8f;
         [SerializeField] private LayerMask interactionMask;
+        [SerializeField] private Color pickUpRangeGizmosColor = Color.green;
         [Space]
         [SerializeField] private Camera mainCamera = null;
 
@@ -24,28 +26,34 @@ namespace DivinityGaz.Interactables
         {
             if (Input.GetKeyDown(interactionKey))
             {
-                currentInteractable?.interact(gameObject);
+                currentInteractable?.Interact(gameObject);
             }
         }
 
         private void GetInteractable ()
         {
-            Ray cameraRay = mainCamera.ViewportPointToRay(Input.mousePosition);
+            Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(cameraRay, out RaycastHit hit,interactionRange, interactionMask.value))
+            if (Physics.Raycast(cameraRay, out RaycastHit hit, interactionRange, interactionMask.value))
             {
-                if(hit.transform.TryGetComponent(out IInteractable interactable))
+                if (hit.transform.TryGetComponent(out IInteractable interactable))
                 {
                     if (currentInteractable != interactable)
                     {
                         currentInteractable = interactable;
-                        currentInteractable.OnEnterInteract();
                     }
+                    currentInteractable.OnEnterInteract();
                 }
             } else
             {
                 currentInteractable?.OnExitInteract();
             }
+        }
+
+        private void OnDrawGizmos ()
+        {
+            Gizmos.color = pickUpRangeGizmosColor;
+            Gizmos.DrawWireSphere(this.transform.position, interactionRange);
         }
     }
 }

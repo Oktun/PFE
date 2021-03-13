@@ -14,6 +14,7 @@ namespace DivinityGaz.InventorySystem
         public string Name { get { return name; } }
         public Sprite Icon { get { return icon; } }
         public abstract string ColoredName { get; } 
+        public bool IsEquipable { get { return isEquipable; } }
 
         public abstract string GetInfoDisplayString ();
     }

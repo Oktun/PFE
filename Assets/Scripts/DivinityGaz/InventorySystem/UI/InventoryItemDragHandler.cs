@@ -35,6 +35,17 @@ namespace DivinityGaz.InventorySystem
             base.OnPointerEnter(eventData);
             ((InventorySlot)ItemSlotUI).Handler.ItemHandler.DisableDisplay();
         }
+
+        public override void OnPointerDown (PointerEventData eventData)
+        {
+            base.OnPointerDown(eventData);
+
+            if(eventData.button == PointerEventData.InputButton.Left)
+            {
+                ((InventorySlot)ItemSlotUI).Handler.ItemHandler.IsDisplayLocked = true;
+                ((InventorySlot)ItemSlotUI).Handler.ItemHandler.DisplayItem((InventoryItem)itemSlotUI.SlotItem, ItemSlotUI.SlotIndex);
+            }
+        }
     }
 }
 
