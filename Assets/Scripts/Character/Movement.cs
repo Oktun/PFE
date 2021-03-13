@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
         public string pull = "pullString";
         public string fire = "fire";
         public string axeAttack = "attackD";
+        public string fistAttack = "fist";
     }
     [SerializeField] public AnimationStrings animStrings; 
 
@@ -42,5 +43,7 @@ public class Movement : MonoBehaviour
 
     public void CharacterFireArrow() => anim.SetTrigger(animStrings.fire);
 
-    public void CharacterAttackWithAxe(bool attackAxe) => anim.SetBool(animStrings.axeAttack, attackAxe); 
+    public void CharacterAttackWithAxe(bool attackAxe) => anim.SetBool(animStrings.axeAttack, attackAxe);
+
+    public void CharacterFistAttack(bool fistAttack) => anim.SetBool(animStrings.fistAttack, fistAttack); 
 }

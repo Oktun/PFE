@@ -743,7 +743,7 @@ ModelImporter:
     second: Zombie_HyperChase_2
   - first:
       74: 4926747047067562638
-    second: Zombie_HyperChase_2_IP
+    second: Zombie_HyperChase_2_IP_Runner
   - first:
       74: 3114952173260464164
     second: Zombie_HyperChase_3
@@ -1022,7 +1022,7 @@ ModelImporter:
     second: Zombie_Walk_F_4_Loop_IP
   - first:
       74: -6053513059638926808
-    second: Zombie_Walk_F_5_Full_Loop
+    second: ZombieWalk Loop 1
   - first:
       74: 4466994665727997449
     second: Zombie_Walk_F_5_Full_Loop_IP
@@ -3661,7 +3661,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Zombie_HyperChase_2_IP
+      name: Zombie_HyperChase_2_IP_Runner
       takeName: Zombie_HyperChase_2_IP
       internalID: 4926747047067562638
       firstFrame: 0
@@ -3673,14 +3673,14 @@ ModelImporter:
       loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
@@ -6358,7 +6358,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Zombie_Walk_F_5_Full_Loop
+      name: ZombieWalk Loop 1
       takeName: Zombie_Walk_F_5_Full_Loop
       internalID: -6053513059638926808
       firstFrame: 0

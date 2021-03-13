@@ -54,6 +54,21 @@ public class InputSystem : MonoBehaviour
             return true;
         }
     }
+
+    bool isUsingFist
+    {
+        get
+        {
+            if (equipedSlot == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     public Bow bowScript;
     public Axe axeScript;
 
@@ -159,13 +174,11 @@ public class InputSystem : MonoBehaviour
                 {
                     counter += Time.deltaTime; 
                 }
-
-            
-
         }
         else
         {
             AxeAttack();
+            //FistAttack();
             bowScript.RemoveCrossHair();
             DisableArrow();
             Release();
@@ -362,5 +375,18 @@ public class InputSystem : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Fist
+
+    private void FistAttack()
+    {
+        if (equipedSlot == 0)
+        {
+           if (Input.GetButton(input.fire))
+                moveScript.CharacterFistAttack(true);
+                //Attack withFist animation
+        }
+    }
     #endregion
 }
