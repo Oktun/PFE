@@ -7,7 +7,7 @@ namespace DivinityGaz.Interactables
     public interface IInteractable
     {
         void OnEnterInteract ();
-        void interact (GameObject other);
+        void Interact (GameObject other);
         void OnExitInteract ();
     }
 }

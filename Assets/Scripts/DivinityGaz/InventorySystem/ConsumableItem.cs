@@ -19,6 +19,11 @@ namespace DivinityGaz.InventorySystem
 
             return builder.ToString();
         }
+        
+        public void Use ()
+        {
+
+        }
     }
 
 }

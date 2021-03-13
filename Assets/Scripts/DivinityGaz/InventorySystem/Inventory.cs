@@ -109,6 +109,21 @@ namespace DivinityGaz.InventorySystem
             onInventoryItemsUpdate?.Invoke();
         }
 
+        public bool RemoveAt (int index, int amount)
+        {
+            if (amount >= itemSlots[index].Quantity) 
+            { 
+                itemSlots[index] = new ItemSlot();
+            } 
+            else
+            {
+                itemSlots[index].Quantity -= amount;
+            }
+
+            onInventoryItemsUpdate?.Invoke();
+            return itemSlots[index].Quantity > 0;
+        }
+
         public void RemoveItem (ItemSlot itemSlot)
         {
             for (int i = 0; i < itemSlots.Length; i++)

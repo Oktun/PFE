@@ -11,39 +11,16 @@ public class MenuScript : MonoBehaviour {
 
 	bool waitingForKey;
 
+	bool isDisplayingUI = false;
 
 	void Start ()
 	{
 		//Assign menuPanel to the Panel object in our Canvas
 		//Make sure it's not active when the game starts
 		//menuPanel = transform.Find("Panel");
-		menuPanel.gameObject.SetActive(false);
 		waitingForKey = false;
-
-		/*iterate through each child of the panel and check
-		 * the names of each one. Each if statement will
-		 * set each button's text component to display
-		 * the name of the key that is associated
-		 * with each command. Example: the ForwardKey
-		 * button will display "W" in the middle of it
-		 */
-		for(int i = 0; i < menuPanel.childCount; i++)
-		{
-			if(menuPanel.GetChild(i).name == "ForwardKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.forward.ToString();
-			else if(menuPanel.GetChild(i).name == "BackwardKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.backward.ToString();
-			else if(menuPanel.GetChild(i).name == "LeftKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.left.ToString();
-			else if(menuPanel.GetChild(i).name == "RightKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.right.ToString();
-			else if(menuPanel.GetChild(i).name == "InventoryKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.InventoryKey.ToString();
-			else if(menuPanel.GetChild(i).name == "MapKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.mKey.ToString();
-			else if(menuPanel.GetChild(i).name == "HealKey")
-				menuPanel.GetChild(i).GetComponentInChildren<Text>().text = InputManager.IM.hKey.ToString();
-		}
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 
@@ -53,7 +30,7 @@ public class MenuScript : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Escape) && !menuPanel.gameObject.activeSelf)
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
             menuPanel.gameObject.SetActive(true);
         }
 		else if(Input.GetKeyDown(KeyCode.Escape) && menuPanel.gameObject.activeSelf)
@@ -141,19 +118,34 @@ public class MenuScript : MonoBehaviour {
 			PlayerPrefs.SetString("rightKey", InputManager.IM.right.ToString()); //save new key to playerprefs
 			break;
 		case "iKey":
-			InputManager.IM.InventoryKey = newKey; //set jump to new keycode
-			buttonText.text = InputManager.IM.InventoryKey.ToString(); //set button text to new key
-			PlayerPrefs.SetString("inventoryKey", InputManager.IM.InventoryKey.ToString()); //save new key to playerprefs
+			InputManager.IM.inventoryKey = newKey; //set jump to new keycode
+			buttonText.text = InputManager.IM.inventoryKey.ToString(); //set button text to new key
+			PlayerPrefs.SetString("inventoryKey", InputManager.IM.inventoryKey.ToString()); //save new key to playerprefs
 			break;
 		case "mKey":
-			InputManager.IM.mKey = newKey; //set jump to new keycode
-			buttonText.text = InputManager.IM.mKey.ToString(); //set button text to new key
-			PlayerPrefs.SetString("mapKey", InputManager.IM.mKey.ToString()); //save new key to playerprefs
+			InputManager.IM.map = newKey; //set jump to new keycode
+			buttonText.text = InputManager.IM.map.ToString(); //set button text to new key
+			PlayerPrefs.SetString("mapKey", InputManager.IM.map.ToString()); //save new key to playerprefs
 			break;
 		case "hKey":
-			InputManager.IM.hKey = newKey; //set jump to new keycode
-			buttonText.text = InputManager.IM.hKey.ToString(); //set button text to new key
-			PlayerPrefs.SetString("healKey", InputManager.IM.hKey.ToString()); //save new key to playerprefs
+			InputManager.IM.skillTree = newKey; //set jump to new keycode
+			buttonText.text = InputManager.IM.skillTree.ToString(); //set button text to new key
+			PlayerPrefs.SetString("healKey", InputManager.IM.skillTree.ToString()); //save new key to playerprefs
+			break;
+		case "axe":
+			InputManager.IM.axe = newKey; //set jump to new keycode
+			buttonText.text = InputManager.IM.axe.ToString(); //set button text to new key
+			PlayerPrefs.SetString("axeKey", InputManager.IM.axe.ToString()); //save new key to playerprefs
+			break;
+		case "hand":
+			InputManager.IM.hand = newKey; //set jump to new keycode
+			buttonText.text = InputManager.IM.hand.ToString(); //set button text to new key
+			PlayerPrefs.SetString("handKey", InputManager.IM.hand.ToString()); //save new key to playerprefs
+			break;
+		case "bow":
+			InputManager.IM.bow = newKey; //set jump to new keycode
+			buttonText.text = InputManager.IM.bow.ToString(); //set button text to new key
+			PlayerPrefs.SetString("bowKey", InputManager.IM.bow.ToString()); //save new key to playerprefs
 			break;
 		}
 

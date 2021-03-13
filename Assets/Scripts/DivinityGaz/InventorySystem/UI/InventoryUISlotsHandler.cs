@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace DivinityGaz.InventorySystem
 {
@@ -9,6 +10,10 @@ namespace DivinityGaz.InventorySystem
         [Header("Logic Input")]
         [SerializeField] private Inventory inventory = null;
         [SerializeField] private GameObject inventoryPanel = null;
+
+        private bool isInventoryUIDisplayed = false;
+        [Space]
+        [SerializeField] private float tweenDuration = .3f;
 
         [Space]
         [Header("UI Settings")]
@@ -19,6 +24,11 @@ namespace DivinityGaz.InventorySystem
         public ItemHandler ItemHandler { get { return itemHandler; } }
         
         public Inventory Inventory { get => inventory; }
+
+        private void Awake ()
+        {
+            inventoryPanel.transform.DOScaleX(0f, 0f);
+        }
 
         public void UpdateSlots ()
         {
@@ -32,8 +42,17 @@ namespace DivinityGaz.InventorySystem
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                inventoryPanel?.SetActive(!inventoryPanel.activeSelf);
+                isInventoryUIDisplayed = !isInventoryUIDisplayed;
+                TweenOnOffInventoryUI(isInventoryUIDisplayed);
+                if (isInventoryUIDisplayed == false) { itemHandler.DisableDisplay(); }
             }
+        }
+
+        private void TweenOnOffInventoryUI (bool state)
+        {
+            float scaleValue = state ? 1f : 0f;
+
+            inventoryPanel.transform.DOScale(scaleValue, tweenDuration);
         }
     }
 }
