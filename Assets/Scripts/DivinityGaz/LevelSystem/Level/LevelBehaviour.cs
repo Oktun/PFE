@@ -1,6 +1,4 @@
-﻿using DivinityGaz.CustomEvents.Double;
-using DivinityGaz.CustomEvents.Single;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace DivinityGaz.LevelSystem.Level
@@ -22,7 +20,7 @@ namespace DivinityGaz.LevelSystem.Level
         public Action OnXPAdded = null;
         public Action OnLevelUp = null;
         public Action OnLoad = null;
-    
+
         public void Start ()
         {
             OnLoad?.Invoke();

@@ -6,8 +6,5 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     private bool isAnimating = false;
-
     public bool IsAnimating { get { return isAnimating; } }
-
-    
 }

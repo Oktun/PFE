@@ -8,16 +8,16 @@ public class InputManager : MonoBehaviour
 
     //Create Keycodes that will be associated with each of our commands.
     //These can be accessed by any other script in our game
-    public KeyCode inventoryKey { get; set; }
-    public KeyCode map { get; set; }
+    public KeyCode inventoryKey { get; set; } = KeyCode.I;
+    public KeyCode map { get; set; } = KeyCode.M;
     public KeyCode skillTree { get; set; }
     public KeyCode hand { get; set; }
     public KeyCode axe { get; set; }
     public KeyCode bow { get; set; }
     public KeyCode forward { get; set; } = KeyCode.Z;
-    public KeyCode backward { get; set; }
-    public KeyCode left { get; set; }
-    public KeyCode right { get; set; }
+    public KeyCode backward { get; set; } = KeyCode.S;
+    public KeyCode left { get; set; } = KeyCode.Q;
+    public KeyCode right { get; set; } = KeyCode.D;
 
     void Awake ()
     {

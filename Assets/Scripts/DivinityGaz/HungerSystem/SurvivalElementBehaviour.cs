@@ -1,4 +1,4 @@
-﻿using DivinityGaz.CustomEvents.Double;
+﻿using System;
 using UnityEngine;
 
 namespace DivinityGaz.HungerSystem
@@ -8,7 +8,7 @@ namespace DivinityGaz.HungerSystem
         private float currentHungerPercentage = 100f;
         private float currentThirstPercentage = 100f;
 
-        [SerializeField] private DoubleIntEvent onStatsChange = null;
+        [SerializeField] private Action<SurvivalElementBehaviour> onStatsChange = null;
 
         [Space]
         [Header("Hunger Settings")]
@@ -41,7 +41,7 @@ namespace DivinityGaz.HungerSystem
                 if (currentPercentage < 0) { currentPercentage = 0; }
                 Debug.Log(currentPercentage);
 
-                onStatsChange?.Invoke((int)currentHungerPercentage, (int)currentThirstPercentage);
+                onStatsChange?.Invoke(this);
             }
         }
 

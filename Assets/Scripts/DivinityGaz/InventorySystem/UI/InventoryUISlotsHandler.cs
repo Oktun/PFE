@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DivinityGaz.Managers;
 
 namespace DivinityGaz.InventorySystem
 {
     public class InventoryUISlotsHandler : MonoBehaviour
     {
+        [SerializeField] private GameManager gameManager = null;
+
+        [Space]
         [Header("Logic Input")]
         [SerializeField] private Inventory inventory = null;
         [SerializeField] private GameObject inventoryPanel = null;
@@ -27,7 +31,7 @@ namespace DivinityGaz.InventorySystem
 
         private void Awake ()
         {
-            inventoryPanel.transform.DOScaleX(0f, 0f);
+            inventoryPanel.transform.DOScale(0f, 0f);
         }
 
         public void UpdateSlots ()
@@ -40,9 +44,10 @@ namespace DivinityGaz.InventorySystem
 
         private void Update ()
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(InputManager.IM.inventoryKey))
             {
                 isInventoryUIDisplayed = !isInventoryUIDisplayed;
+                gameManager.InventoryUIEnable = isInventoryUIDisplayed;
                 TweenOnOffInventoryUI(isInventoryUIDisplayed);
                 if (isInventoryUIDisplayed == false) { itemHandler.DisableDisplay(); }
             }

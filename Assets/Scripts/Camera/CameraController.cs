@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DivinityGaz.Managers;
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager = null;
     //This Handle Camera Settings
     [System.Serializable]
     public class CameraSettings
@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
     RaycastHit hit;
 
 
-    private void Start()
+    private void Start ()
     {
         mainCamera = Camera.main;
         center = transform.GetChild(0);
@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
         cameraInitialPos = mainCamera.transform.localPosition;
     }
 
-    private void Update()
+    private void Update ()
     {
         if (!target)
             return;
@@ -67,37 +67,42 @@ public class CameraController : MonoBehaviour
         if (!Application.isPlaying)
             return;
 
+        if (!gameManager.IsAbleToMove) { return; }
+
         ZoomCamera();
         HandleCollision();
     }
 
-    private void FixedUpdate () => RotateCamera();
+    private void FixedUpdate ()
+    {
+        if (!gameManager.IsAbleToMove) { return; }
+        RotateCamera();
+    }
 
-    private void LateUpdate()
+    private void LateUpdate ()
     {
         if (target)
         {
             FollowPlayer();
-        }
-        else
+        } else
         {
             FindPlayer();
         }
     }
 
     //This's to find the gameobject WithTag Player
-    private void FindPlayer() => target = GameObject.FindGameObjectWithTag("Player").transform;
+    private void FindPlayer () => target = GameObject.FindGameObjectWithTag("Player").transform;
 
     //Player Follow
-    void FollowPlayer()
+    void FollowPlayer ()
     {
-        Vector3 moveVector = Vector3.Lerp(transform.position, target.transform.position, 
+        Vector3 moveVector = Vector3.Lerp(transform.position, target.transform.position,
             cameraSettings.moveSpeed * Time.deltaTime);
         transform.position = moveVector;
     }
 
     //Handle Camera Rotation
-    void RotateCamera()
+    void RotateCamera ()
     {
         cameraXrotation += Input.GetAxis(inputSettings.MouseYAxis) * cameraSettings.MouseY_Sensitivity;
         cameraYrotation += Input.GetAxis(inputSettings.MouseXAxis) * cameraSettings.MouseX_Sensitivity;
@@ -108,21 +113,20 @@ public class CameraController : MonoBehaviour
 
         Vector3 rotatingAngle = new Vector3(cameraXrotation, cameraYrotation, 0);
 
-        Quaternion rotation = Quaternion.Slerp(center.transform.localRotation, Quaternion.Euler(rotatingAngle), 
+        Quaternion rotation = Quaternion.Slerp(center.transform.localRotation, Quaternion.Euler(rotatingAngle),
             cameraSettings.rotationSpeed * Time.deltaTime);
 
         center.transform.localRotation = rotation;
     }
 
     //This  handle the Zoom In and the Zoom Out
-    void ZoomCamera()
+    void ZoomCamera ()
     {
         if (Input.GetButton(inputSettings.AimingInput))
         {
             mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, cameraSettings.zoomFieldOfView,
                 cameraSettings.zoomSpeed * Time.deltaTime);
-        }
-        else
+        } else
         {
             mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, cameraSettings.originalFieldOfView,
                 cameraSettings.zoomSpeed * Time.deltaTime);
@@ -130,7 +134,7 @@ public class CameraController : MonoBehaviour
     }
 
     //this handle the collision
-    void HandleCollision()
+    void HandleCollision ()
     {
         if (!Application.isPlaying)
             return;
@@ -142,8 +146,7 @@ public class CameraController : MonoBehaviour
                 hit.point.z + hit.normal.z * .2f);
             mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, newCamPos,
                 Time.deltaTime * cameraSettings.moveSpeed);
-        }
-        else
+        } else
         {
             mainCamera.transform.localPosition = Vector3.Lerp(mainCamera.transform.localPosition, cameraInitialPos,
                 Time.deltaTime * cameraSettings.moveSpeed);

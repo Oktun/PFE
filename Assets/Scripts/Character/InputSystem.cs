@@ -1,13 +1,13 @@
 ﻿using DivinityGaz.InventorySystem;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using DivinityGaz.Managers;
 using UnityEngine;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Animator))]
 public class InputSystem : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager = null;
+
     Movement moveScript;
 
     [System.Serializable]
@@ -30,7 +30,7 @@ public class InputSystem : MonoBehaviour
 
     [Header("Spine Settings")]
     public Transform spine;
-    public Vector3 spineOffset;
+    public Vector3 spineOffsetWithBow;
 
     [Header("Head Rotation Settings")]
     public float lookAtpoint = 2.8f;
@@ -43,7 +43,8 @@ public class InputSystem : MonoBehaviour
 
     bool isAiming;
 
-    bool isAbleToAim {
+    bool isAbleToAim
+    {
         get
         {
             if (equipedSlot == 0 || weapons[equipedSlot].IsMelee)
@@ -62,8 +63,7 @@ public class InputSystem : MonoBehaviour
             if (equipedSlot == 0)
             {
                 return true;
-            }
-            else
+            } else
             {
                 return false;
             }
@@ -73,7 +73,7 @@ public class InputSystem : MonoBehaviour
     public Axe axeScript;
 
     public bool testAim;
-    public float turnSpeed=15f;
+    public float turnSpeed = 15f;
 
     [Header("KeyInput")]
     [SerializeField] Vector2 inputVector = new Vector2();
@@ -97,9 +97,9 @@ public class InputSystem : MonoBehaviour
         bow
     }
 
-    
 
-    void Start()
+
+    void Start ()
     {
         weapons[1] = axeScript;
         weapons[2] = bowScript;
@@ -107,13 +107,13 @@ public class InputSystem : MonoBehaviour
         mainCamera = Camera.main.transform;
         camCenter = Camera.main.transform.parent;
         playerAnim = GetComponent<Animator>();
-        
+
         //Cursor visibilty
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
+    void Update ()
     {
         isAiming = Input.GetButton(input.aim);
         if (testAim)
@@ -122,12 +122,10 @@ public class InputSystem : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha1))
         {
             SwitchSatesFunction(0);
-        }
-        else if (Input.GetKey(KeyCode.Alpha2))
+        } else if (Input.GetKey(KeyCode.Alpha2))
         {
             SwitchSatesFunction(1);
-        }
-        else if (Input.GetKey(KeyCode.Alpha3))
+        } else if (Input.GetKey(KeyCode.Alpha3))
         {
             SwitchSatesFunction(2);
         }
@@ -150,32 +148,29 @@ public class InputSystem : MonoBehaviour
                 EnableArrow();
                 enableArrow = false;
             }
-                if (counter > timeBetweenShoot)
+            if (counter > timeBetweenShoot)
+            {
+                moveScript.CharacterPullString(Input.GetButton(input.fire));
+                if (Input.GetButtonUp(input.fire))
                 {
-                    moveScript.CharacterPullString(Input.GetButton(input.fire));
-                    if (Input.GetButtonUp(input.fire))
-                    { 
-                
-                        moveScript.CharacterFireArrow();
-                        if (hitDetected)
-                        {
-                            weapons[equipedSlot].Fire(hit.point);
-                            counter = 0;
-                        }
-                        else
-                        {
-                            weapons[equipedSlot].Fire(ray.GetPoint(300f));
-                            counter = 0;
-                        }
-                    }
 
+                    moveScript.CharacterFireArrow();
+                    if (hitDetected)
+                    {
+                        weapons[equipedSlot].Fire(hit.point);
+                        counter = 0;
+                    } else
+                    {
+                        weapons[equipedSlot].Fire(ray.GetPoint(300f));
+                        counter = 0;
+                    }
                 }
-                else
-                {
-                    counter += Time.deltaTime; 
-                }
-        }
-        else
+
+            } else
+            {
+                counter += Time.deltaTime;
+            }
+        } else
         {
             AxeAttack();
             //FistAttack();
@@ -188,14 +183,16 @@ public class InputSystem : MonoBehaviour
     }
 
 
-    void Move()
+    void Move ()
     {
+        if (gameManager.IsAbleToMove == false) { return; }
+
         bool movedYThisFrame = false;
         bool movedXThisFrame = false;
-        bool leftArrow = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Q);
-        bool rightArrow = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
-        bool upArrow = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z);
-        bool downArrow = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
+        bool leftArrow = Input.GetKey(InputManager.IM.left);
+        bool rightArrow = Input.GetKey(InputManager.IM.right);
+        bool upArrow = Input.GetKey(InputManager.IM.forward);
+        bool downArrow = Input.GetKey(InputManager.IM.backward);
 
         if (upArrow)
         {
@@ -230,7 +227,7 @@ public class InputSystem : MonoBehaviour
         }
     }
 
-    private float FixAxis(float delta, bool state)
+    private float FixAxis (float delta, bool state)
     {
         if (!state)
         {
@@ -243,8 +240,7 @@ public class InputSystem : MonoBehaviour
                     delta = 0;
                 }
 
-            }
-            else
+            } else
             {
                 delta += frameInputValue;
 
@@ -253,14 +249,12 @@ public class InputSystem : MonoBehaviour
                     delta = 0;
                 }
             }
-        }
-        else
+        } else
         {
             if (delta > 1)
             {
                 delta = 1;
-            }
-            else if (delta < -1)
+            } else if (delta < -1)
             {
                 delta = -1;
             }
@@ -269,16 +263,16 @@ public class InputSystem : MonoBehaviour
         return delta;
     }
 
-    void LateUpdate()
+    void LateUpdate ()
     {
         if (isAiming && isAbleToAim)
         {
-            RotateCharacterSprin();
+            RotateCharacterSprin(spineOffsetWithBow);
         }
     }
 
     //Does the aiming and sends a raycast to target
-    void Aim()
+    void Aim ()
     {
         Vector3 camPosition = mainCamera.position;
         Vector3 dir = mainCamera.forward;
@@ -289,15 +283,14 @@ public class InputSystem : MonoBehaviour
             hitDetected = true;
             Debug.DrawLine(ray.origin, hit.point, Color.green);
             bowScript.ShowCrossHaire(hit.point);
-        }
-        else
+        } else
         {
             hitDetected = false;
             bowScript.RemoveCrossHair();
         }
     }
-    
-    void RotateToCamView()
+
+    void RotateToCamView ()
     {
         Vector3 camCenterPos = camCenter.position;
 
@@ -312,19 +305,19 @@ public class InputSystem : MonoBehaviour
         transform.rotation = finalRotation;
     }
 
-    void RotateCharacterSprin()
+    void RotateCharacterSprin (Vector3 vector3)
     {
         spine.LookAt(ray.GetPoint(50));
-        spine.Rotate(spineOffset);
+        spine.Rotate(vector3);
     }
 
-    public void Pull() => bowScript.PullString();
+    public void Pull () => bowScript.PullString();
 
-    public void EnableArrow() => bowScript.PickArrow();
+    public void EnableArrow () => bowScript.PickArrow();
 
-    public void DisableArrow() => bowScript.DisableArrow();
+    public void DisableArrow () => bowScript.DisableArrow();
 
-    public void Release() => bowScript.ReleaseString();
+    public void Release () => bowScript.ReleaseString();
 
     // Switch Between Weapons Handler
     #region Equipement
@@ -332,11 +325,11 @@ public class InputSystem : MonoBehaviour
     [SerializeField] DefaultWeapon[] weapons = new DefaultWeapon[3];
     public int equipedSlot = 0;
 
-    public void SwitchSatesFunction(WeaponItem weaponItem)
+    public void SwitchSatesFunction (WeaponItem weaponItem)
     {
         if (weapons[equipedSlot] == weaponItem) { return; }
 
-        for(int i = 0; i < weapons.Length; i++)
+        for (int i = 0; i < weapons.Length; i++)
         {
             if (weapons[i] == weaponItem)
             {
@@ -346,16 +339,16 @@ public class InputSystem : MonoBehaviour
         }
     }
 
-    private void SwitchSatesFunction(int index)
+    private void SwitchSatesFunction (int index)
     {
-        if(equipedSlot == index) { return; }
+        if (equipedSlot == index) { return; }
 
-        if(equipedSlot != 0)
+        if (equipedSlot != 0)
         {
             weapons[equipedSlot].UnEquipWeapon();
         }
 
-        if(index != 0)
+        if (index != 0)
         {
             weapons[index].EquipWeapon();
         }
@@ -366,12 +359,12 @@ public class InputSystem : MonoBehaviour
 
     #region Axe
 
-    private void AxeAttack()
+    private void AxeAttack ()
     {
         if (equipedSlot == 1)
         {
-            if(Input.GetButton(input.fire))
-            moveScript.CharacterAttackWithAxe(true);
+            if (Input.GetButton(input.fire))
+                moveScript.CharacterAttackWithAxe(true);
         }
     }
 
@@ -379,13 +372,13 @@ public class InputSystem : MonoBehaviour
 
     #region Fist
 
-    private void FistAttack()
+    private void FistAttack ()
     {
         if (equipedSlot == 0)
         {
-           if (Input.GetButton(input.fire))
+            if (Input.GetButton(input.fire))
                 moveScript.CharacterFistAttack(true);
-                //Attack withFist animation
+            //Attack withFist animation
         }
     }
     #endregion
