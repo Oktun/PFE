@@ -73,6 +73,8 @@ namespace DivinityGaz.InventorySystem
 
         public void Drop ()
         {
+            Transform ojbectCreated = Instantiate(itemSelected.DropObject);
+            ojbectCreated.GetComponent<Rigidbody>().AddForce(Vector3.forward, ForceMode.Impulse);
             playersInventory.RemoveAt(itemSlotIndex);
             DisableDisplay(true);
         }

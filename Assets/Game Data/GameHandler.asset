@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4b6a07cd4194e4b90eaefef8ce8eb3, type: 3}
   m_Name: GameHandler
   m_EditorClassIdentifier: 
-  settingsUIEnable: 0
+  settingsUIEnable: 1
   inventoryUIEnable: 0

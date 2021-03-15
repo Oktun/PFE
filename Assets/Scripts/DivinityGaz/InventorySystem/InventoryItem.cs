@@ -6,6 +6,9 @@ namespace DivinityGaz.InventorySystem
 {
     public abstract class InventoryItem : Item
     {
+        [SerializeField] private Transform dropObject = null;
+        public Transform DropObject { get { return dropObject; } }
+
         [Header("Item Information")]
         [SerializeField, Min(1)] private int maxStack = 1;
 
