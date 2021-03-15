@@ -139,7 +139,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Run Back
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3660160105839617316}
@@ -152,7 +152,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4926747047067562638, guid: 61be648289fde97458dd83fcb6e44f2d,
+  m_Motion: {fileID: -5317211306332238656, guid: 61be648289fde97458dd83fcb6e44f2d,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -220,7 +220,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RunnerZombie Animator
+  m_Name: IA Animals
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Walk
@@ -262,7 +262,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Aim Walk Forward
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8480776784139765227}
@@ -275,7 +275,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4926747047067562638, guid: 61be648289fde97458dd83fcb6e44f2d,
+  m_Motion: {fileID: -6053513059638926808, guid: 61be648289fde97458dd83fcb6e44f2d,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

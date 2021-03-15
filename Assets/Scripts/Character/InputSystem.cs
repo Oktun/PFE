@@ -305,8 +305,7 @@ public class InputSystem : MonoBehaviour
         transform.rotation = finalRotation;
     }
 
-
-    void RotateCharacterSprin(Vector3 vector3)
+    void RotateCharacterSprin (Vector3 vector3)
     {
         spine.LookAt(ray.GetPoint(50));
         spine.Rotate(vector3);
