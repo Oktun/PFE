@@ -153,12 +153,12 @@ public abstract class Enemy : MonoBehaviour {
         return false;
     }
 
-    protected bool CheckIfPlayerInRange () {
+    protected bool CheckIfTargetInRange (string targetTag = "Player") {
         Collider[] hits = Physics.OverlapSphere(this.transform.position, detectionRange);
 
         if (hits != null) {
             for (int i = 0; i < hits.Length; i++) {
-                if (hits[i].gameObject.tag == "Player") {
+                if (hits[i].gameObject.tag == targetTag) {
                     tragetDetected = hits[i].transform;
                     return true;
                 }
@@ -213,7 +213,7 @@ public abstract class Enemy : MonoBehaviour {
             animationHandler.TriggerWalkAnimation();
         }
 
-        if (CheckIfPlayerInRange()) {
+        if (CheckIfTargetInRange()) {
             currentState = AIState.Attack;
         }
     }
@@ -264,7 +264,7 @@ public abstract class Enemy : MonoBehaviour {
             }
         }
 
-        if (CheckIfPlayerInRange()) {
+        if (CheckIfTargetInRange()) {
             currentState = AIState.Attack;
             isAtTragetLastPosition = false;
             isFirstTimeToSearch = true;

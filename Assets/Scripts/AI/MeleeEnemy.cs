@@ -34,7 +34,7 @@ public class MeleeEnemy : Enemy {
         attackTimer += Time.deltaTime;
 
         Transform player = null;
-        if (OverLap(meleeHurtZone, out player, "Player")) {
+        if (OverLap(meleeHurtZone, out player)) {
             meshAgentComponent.isStopped = true;
             transform.LookAt(tragetDetected);
 
