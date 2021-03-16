@@ -14,11 +14,10 @@ GameObject:
   - component: {fileID: 4037088320778574115}
   - component: {fileID: 4037088320778574114}
   - component: {fileID: 4037088320778574117}
-  - component: {fileID: 4037088320778574116}
-  - component: {fileID: 4037088320778574119}
+  - component: {fileID: 4184753044714505472}
   m_Layer: 0
   m_Name: IA Runner
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,9 +110,9 @@ MonoBehaviour:
   runningSpeed: 2.5
   currentState: 1
   wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {x: -1.5219851e+10, y: 7.47e-43, z: 0.00000020973755}
+  - {x: 0.00000016501951, y: -2.5283172e+29, z: 7.44e-43}
+  - {x: 4.6e-44, y: 0.000010632954, z: -1.5219851e+10}
   currentWayPointIndex: 0
   detectionRange: 6.92
   detectionRangeGizmoColor: {r: 0, g: 0, b: 1, a: 1}
@@ -121,11 +120,22 @@ MonoBehaviour:
   searchingTime: 2
   agroRange: 12.03
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  spawnVfxOn_REF: {fileID: 8653199511406573559, guid: 6a1a7d6bbe79c7a478dc0eb650adde38,
+    type: 3}
+  deathVFX: {fileID: 0}
+  gameObjectVFX:
+  - {fileID: 1286864560048534, guid: a60781ace6ae49347be6710ccaf6e9dd, type: 3}
+  - {fileID: 1706116407311228, guid: 828bdd7ee97687846ae3bd14c3abdec8, type: 3}
+  - {fileID: 1957075435711846, guid: 1b11f3eacf0dce144ae701d97e87fad9, type: 3}
+  isAnimal: 0
+  isZombie: 1
   meleeHurtZone: 1.25
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   attackCooldown: 0
   attackTimer: 0
   attackDamage: 0
+  isTeleporter: 0
+  playerTeleportPosition: {fileID: 0}
 --- !u!54 &4037088320778574117
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,8 +152,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &4037088320778574116
-BoxCollider:
+--- !u!136 &4184753044714505472
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,25 +162,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.6, z: 1}
-  m_Center: {x: 0, y: 1.06, z: 0}
---- !u!111 &4037088320778574119
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4037088320778574118}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Animation: {fileID: -6053513059638926808, guid: 61be648289fde97458dd83fcb6e44f2d,
-    type: 3}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Radius: 0.28
+  m_Height: 2.01
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1001 &4037088319913967992
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -48,6 +48,19 @@ public abstract class Enemy : MonoBehaviour {
     [SerializeField] protected float agroRange = 20f;
     [SerializeField] protected Color agroRangeGizmoColor = Color.cyan;
 
+    [Space]
+    [Header("VFX Settings")]
+    [SerializeField] protected SpawnVfxOnZombie spawnVfxOn_REF;
+    [SerializeField] protected GameObject deathVFX;
+    [SerializeField] protected List<GameObject> gameObjectVFX = new List<GameObject>();
+
+    [Space]
+    [Header("Zombies & Animals Def")]
+    [SerializeField] protected bool isAnimal = false;
+    [SerializeField] protected bool isZombie = true;
+
+
+
     private float timer = 0f;
     private float waitTime = 4f;
     
@@ -58,6 +71,24 @@ public abstract class Enemy : MonoBehaviour {
         meshAgentComponent = GetComponent<NavMeshAgent>();
         animationHandler = GetComponent<AIAnimationHandler>();
 
+    }
+
+    protected virtual void OnEnable()
+    {
+        if(isZombie == true)
+        {
+            spawnVfxOn_REF.SpawnVFX(new Vector3(transform.position.x, 0, transform.position.z),
+                gameObjectVFX.GetRandomFromList());
+        }
+    }
+
+    protected virtual void OnDisable()
+    {
+        if(isZombie == true)
+        {
+            spawnVfxOn_REF.SpawnVFX(new Vector3(transform.position.x, 0, transform.position.z),
+                deathVFX);
+        }
     }
 
     private void Start()

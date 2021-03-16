@@ -79,23 +79,18 @@ public class EnemyBomber : Enemy
         }
     }
 
-    /*private void ExploseHimSelf()
+    private void ExploseHimSelf()
     {
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders)
         {
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
-            NavMeshAgent nav = hit.GetComponent<NavMeshAgent>();
-            
-            if (rb != null && nav != null)
+            if ((hit.CompareTag("Zombie")))
             {
-                nav.isStopped = true; 
-                rb.AddExplosionForce(power, explosionPos, radius, 3.0F);
-                nav.enabled = false;
+
             }
         }
-    }*/
+    }
 
     
 }

@@ -17,11 +17,14 @@ public class MeleeEnemy : Enemy {
     private bool hasTeleported = true;
     [SerializeField] private Transform playerTeleportPosition = null;
 
+
     protected override void Awake()
     {
         base.Awake();
         //transform.GetChild(Random.Range(0, transform.childCount - 1)).gameObject.SetActive(true);
     }
+
+    
 
     protected override void OnDrawGizmos () {
         base.OnDrawGizmos();
@@ -58,6 +61,8 @@ public class MeleeEnemy : Enemy {
                 if (hasTeleported)
                 {
                     transform.position = playerTeleportPosition.position;
+                    spawnVfxOn_REF.SpawnVFX(new Vector3(transform.position.x, 0, transform.position.z),
+                        gameObjectVFX.GetRandomFromList());
                     hasTeleported = false;
                 }
             }
