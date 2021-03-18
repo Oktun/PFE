@@ -8,9 +8,9 @@ namespace DivinityGaz.InventorySystem
     {
         [Header("Consumable Information")]
         [SerializeField] private string useText = "Does something?";
-        [SerializeField] private DefaultWeapon weaponScript = null;
+        [SerializeField] private int weaponSlotIndex = -1;
 
-        public DefaultWeapon WeaponScript { get { return weaponScript; } }
+        public int WeaponSlotIndex { get { return weaponSlotIndex; } }
 
         public override string GetInfoDisplayString ()
         {
@@ -23,10 +23,6 @@ namespace DivinityGaz.InventorySystem
             return builder.ToString();
         }
 
-        public void Use (InputSystem inputSystem)
-        {
-            inputSystem.SwitchSatesFunction(this);
-        }
     }
 
 }

@@ -2,8 +2,7 @@
 
 namespace DivinityGaz.Managers
 {
-    [CreateAssetMenu(fileName = "Manager", menuName = "Game Manager")]
-    public class GameManager : ScriptableObject
+    public class GameManager : MonoBehaviour
     {
         [SerializeField] private bool settingsUIEnable = false;
         [SerializeField] private bool inventoryUIEnable = false;
@@ -26,6 +25,11 @@ namespace DivinityGaz.Managers
             {
                 return !settingsUIEnable && !inventoryUIEnable;
             }
+        }
+
+        private void Start ()
+        {
+            CursorBehaviour();
         }
 
         private void CursorBehaviour ()
