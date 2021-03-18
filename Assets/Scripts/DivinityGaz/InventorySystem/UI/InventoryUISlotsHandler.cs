@@ -49,7 +49,7 @@ namespace DivinityGaz.InventorySystem
                 isInventoryUIDisplayed = !isInventoryUIDisplayed;
                 gameManager.InventoryUIEnable = isInventoryUIDisplayed;
                 TweenOnOffInventoryUI(isInventoryUIDisplayed);
-                if (isInventoryUIDisplayed == false) { itemHandler.DisableDisplay(); }
+                if (isInventoryUIDisplayed == false) { itemHandler.DisableDisplay(true); }
             }
         }
 

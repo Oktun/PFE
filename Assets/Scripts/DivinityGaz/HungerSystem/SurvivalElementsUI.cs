@@ -1,19 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace DivinityGaz.HungerSystem
 {
     public class SurvivalElementsUI : MonoBehaviour
     {
+        [SerializeField] private SurvivalElementBehaviour survivalElements = null;
+        [Space]
         [SerializeField] private Image hungerCircle = null;
         [SerializeField] private Image thirstCircle = null;
 
-        public void onStatsChanged (int hungerLevel, int thirstLevel)
+        private void OnEnable ()
         {
-            hungerCircle.fillAmount = (float)hungerLevel / 100;
-            thirstCircle.fillAmount = (float)thirstLevel / 100;
+            survivalElements.OnStatsChange += OnStatsChanged;
+        }
+
+        private void OnDisable ()
+        {
+            survivalElements.OnStatsChange -= OnStatsChanged;
+        }
+
+        public void OnStatsChanged (SurvivalElementBehaviour survivalElement)
+        {
+            hungerCircle.fillAmount = survivalElement.CurrentHungerPercentage / 100;
+            thirstCircle.fillAmount = survivalElement.CurrentThirstPercentage / 100;
         }
     }
 }

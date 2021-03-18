@@ -14,6 +14,11 @@ public abstract class DefaultWeapon : MonoBehaviour
     [SerializeField] protected Transform unEquipParent;
     [SerializeField] protected Transform equipParent;
 
+    private void Start ()
+    {
+        UnEquipWeapon();
+    }
+
     public virtual void EquipWeapon()
     {
         transform.position = equipPos.position;

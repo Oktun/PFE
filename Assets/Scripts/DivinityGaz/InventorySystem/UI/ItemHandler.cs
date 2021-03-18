@@ -7,6 +7,8 @@ namespace DivinityGaz.InventorySystem
 {
     public class ItemHandler : MonoBehaviour
     {
+        [SerializeField] private InputSystem inputSystem = null;
+
         private InventoryItem itemSelected = null;
         private int itemSlotIndex = -1;
         public bool IsDisplayLocked = false;
@@ -57,6 +59,7 @@ namespace DivinityGaz.InventorySystem
         {
             if (IsDisplayLocked && !isForced) { return; }
 
+            IsDisplayLocked = false;
             isDisplaying = false;
 
             TweenOnAndOffItemDisplay(false);
@@ -69,6 +72,28 @@ namespace DivinityGaz.InventorySystem
             {
                 DisableDisplay(true);
             }
+        }
+
+        [System.Serializable]
+        struct EquipIndecation
+        {
+            public Transform Icon, Key;
+
+            public void SetActive (bool state)
+            {
+                Icon.gameObject.SetActive(true);
+                Key.gameObject.SetActive(true);
+            }
+        }
+        [SerializeField] private EquipIndecation[] equipIndecations = new EquipIndecation[4];
+
+        public void Equip ()
+        {
+            int weaponToUnlockIndex = ((WeaponItem)itemSelected).WeaponSlotIndex;
+            inputSystem.Equip(weaponToUnlockIndex);
+            equipIndecations[weaponToUnlockIndex].SetActive(true);
+            playersInventory.RemoveAt(itemSlotIndex);
+            DisableDisplay(true);
         }
 
         public void Drop ()

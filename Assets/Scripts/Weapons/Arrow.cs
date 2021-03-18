@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using DivinityGaz.HealthSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    [SerializeField] private float damage = 20f;
+
     Rigidbody rb;
     BoxCollider bx;
     bool disableRotation;
@@ -30,6 +33,11 @@ public class Arrow : MonoBehaviour
             disableRotation = true;
             rb.isKinematic = true;
             bx.isTrigger = true;
+        }
+
+        if (collision.transform.TryGetComponent(out HealthComponent hitHealth))
+        {
+            hitHealth.TakeDamage(damage);
         }
     }
 }

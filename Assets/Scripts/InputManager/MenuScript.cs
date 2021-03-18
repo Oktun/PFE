@@ -22,8 +22,6 @@ public class MenuScript : MonoBehaviour
         //Make sure it's not active when the game starts
         //menuPanel = transform.Find("Panel");
         waitingForKey = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
 

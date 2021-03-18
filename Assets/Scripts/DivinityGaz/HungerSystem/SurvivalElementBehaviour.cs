@@ -1,14 +1,18 @@
-﻿using System;
+﻿using DivinityGaz.HealthSystem;
+using System;
 using UnityEngine;
 
 namespace DivinityGaz.HungerSystem
 {
-    public class SurvivalElementBehaviour : MonoBehaviour
+    public class SurvivalElementBehaviour : HealthComponent
     {
         private float currentHungerPercentage = 100f;
         private float currentThirstPercentage = 100f;
 
-        [SerializeField] private Action<SurvivalElementBehaviour> onStatsChange = null;
+        public float CurrentHungerPercentage { get { return currentHungerPercentage; } }
+        public float CurrentThirstPercentage { get { return currentThirstPercentage; } }
+
+        public Action<SurvivalElementBehaviour> OnStatsChange = null;
 
         [Space]
         [Header("Hunger Settings")]
@@ -41,7 +45,7 @@ namespace DivinityGaz.HungerSystem
                 if (currentPercentage < 0) { currentPercentage = 0; }
                 Debug.Log(currentPercentage);
 
-                onStatsChange?.Invoke(this);
+                OnStatsChange?.Invoke(this);
             }
         }
 

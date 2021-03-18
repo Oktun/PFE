@@ -47,7 +47,7 @@ public class InputSystem : MonoBehaviour
     {
         get
         {
-            if (equipedSlot == 0 || weapons[equipedSlot].IsMelee)
+            if (equipedSlot == 0 || weapons[equipedSlot].Weapon.IsMelee)
             {
                 return false;
             }
@@ -101,8 +101,9 @@ public class InputSystem : MonoBehaviour
 
     void Start ()
     {
-        weapons[1] = axeScript;
-        weapons[2] = bowScript;
+        weapons[0].IsEquiped = true;
+        weapons[1].Weapon = axeScript;
+        weapons[2].Weapon = bowScript;
         moveScript = GetComponent<Movement>();
         mainCamera = Camera.main.transform;
         camCenter = Camera.main.transform.parent;
@@ -119,13 +120,13 @@ public class InputSystem : MonoBehaviour
         if (testAim)
             isAiming = true;
 
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Alpha1) && gameManager.IsAbleToMove)
         {
             SwitchSatesFunction(0);
-        } else if (Input.GetKey(KeyCode.Alpha2))
+        } else if (Input.GetKey(KeyCode.Alpha2) && gameManager.IsAbleToMove)
         {
             SwitchSatesFunction(1);
-        } else if (Input.GetKey(KeyCode.Alpha3))
+        } else if (Input.GetKey(KeyCode.Alpha3) && gameManager.IsAbleToMove)
         {
             SwitchSatesFunction(2);
         }
@@ -157,11 +158,11 @@ public class InputSystem : MonoBehaviour
                     moveScript.CharacterFireArrow();
                     if (hitDetected)
                     {
-                        weapons[equipedSlot].Fire(hit.point);
+                        weapons[equipedSlot].Weapon.Fire(hit.point);
                         counter = 0;
                     } else
                     {
-                        weapons[equipedSlot].Fire(ray.GetPoint(300f));
+                        weapons[equipedSlot].Weapon.Fire(ray.GetPoint(300f));
                         counter = 0;
                     }
                 }
@@ -306,7 +307,7 @@ public class InputSystem : MonoBehaviour
     }
 
 
-    void RotateCharacterSprin(Vector3 vector3)
+    void RotateCharacterSprin (Vector3 vector3)
     {
         spine.LookAt(ray.GetPoint(50));
         spine.Rotate(vector3);
@@ -323,16 +324,31 @@ public class InputSystem : MonoBehaviour
     // Switch Between Weapons Handler
     #region Equipement
 
-    [SerializeField] DefaultWeapon[] weapons = new DefaultWeapon[3];
+    [System.Serializable]
+    struct Weapons
+    {
+        public DefaultWeapon Weapon;
+        public bool IsEquiped;
+    }
+
+    [SerializeField] Weapons[] weapons = new Weapons[3];
     public int equipedSlot = 0;
+
+    public void Equip (int index)
+    {
+        weapons[index].IsEquiped = true;
+        weapons[index].Weapon.gameObject.SetActive(true);
+    }
 
     public void SwitchSatesFunction (WeaponItem weaponItem)
     {
-        if (weapons[equipedSlot] == weaponItem) { return; }
+        if (weapons[equipedSlot].Weapon == weaponItem) { return; }
+
+        if (weapons[equipedSlot].IsEquiped == false) { return; }
 
         for (int i = 0; i < weapons.Length; i++)
         {
-            if (weapons[i] == weaponItem)
+            if (weapons[i].Weapon == weaponItem)
             {
                 SwitchSatesFunction(i);
                 break;
@@ -344,14 +360,16 @@ public class InputSystem : MonoBehaviour
     {
         if (equipedSlot == index) { return; }
 
+        if (weapons[index].IsEquiped == false) { return; }
+
         if (equipedSlot != 0)
         {
-            weapons[equipedSlot].UnEquipWeapon();
+            weapons[equipedSlot].Weapon.UnEquipWeapon();
         }
 
         if (index != 0)
         {
-            weapons[index].EquipWeapon();
+            weapons[index].Weapon.EquipWeapon();
         }
 
         equipedSlot = index;
@@ -362,6 +380,8 @@ public class InputSystem : MonoBehaviour
 
     private void AxeAttack ()
     {
+        if (gameManager.IsAbleToMove == false) { return; }
+
         if (equipedSlot == 1)
         {
             if (Input.GetButton(input.fire))

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0290b8b3e915a2a4696cd5e48d7b7081, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  name: 
-  icon: {fileID: 0}
-  isEquipable: 0
+  name: Bow
+  icon: {fileID: 21300000, guid: 040a1f812739a6441a39b47d3fb7cdbf, type: 3}
+  isEquipable: 1
+  dropObject: {fileID: 0}
   maxStack: 1
-  useText: Does something?
-  weaponScript: {fileID: 0}
+  useText: Shoots Arrows
+  weaponSlotIndex: 2
