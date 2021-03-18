@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2898028735814672423}
   - component: {fileID: 2898028735814672408}
   - component: {fileID: 2898028735814672409}
-  - component: {fileID: 2898028735814672410}
+  - component: {fileID: -6808279514109636652}
   m_Layer: 0
   m_Name: IA Tiger Bengala
   m_TagString: Untagged
@@ -119,7 +119,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.6, z: 1}
   m_Center: {x: 0, y: 1.06, z: 0}
---- !u!114 &2898028735814672410
+--- !u!114 &-6808279514109636652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2898028735814672411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb8ea07da03af449b26c384d9e254ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 79ee5627956105d47b0fe26c0adce3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 1
@@ -136,19 +136,29 @@ MonoBehaviour:
   currentState: 0
   wayPoints: []
   currentWayPointIndex: 0
-  detectionRange: 6.8
+  detectionRange: 7.6
   detectionRangeGizmoColor: {r: 0, g: 0, b: 1, a: 1}
-  tragetDetected: {fileID: 0}
+  targetDetected: {fileID: 0}
   searchingTime: 2
-  agroRange: 9.8
+  agroRange: 11.17
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
-  meleeHurtZone: 4.22
+  spawnVfxOn_REF: {fileID: 8653199511406573559, guid: 6a1a7d6bbe79c7a478dc0eb650adde38,
+    type: 3}
+  deathVFX: []
+  spawnVFX:
+  - {fileID: 1286864560048534, guid: a60781ace6ae49347be6710ccaf6e9dd, type: 3}
+  - {fileID: 1706116407311228, guid: 828bdd7ee97687846ae3bd14c3abdec8, type: 3}
+  - {fileID: 1957075435711846, guid: 1b11f3eacf0dce144ae701d97e87fad9, type: 3}
+  isAnimal: 0
+  isZombie: 1
+  isDead: 0
+  meleeHurtZone: 1.69
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   attackCooldown: 0
   attackTimer: 0
   attackDamage: 0
-  radius: 20
-  power: 1000
+  radius: 5
+  power: 10
   hasExplosed: 0
 --- !u!1001 &2898028734526383282
 PrefabInstance:

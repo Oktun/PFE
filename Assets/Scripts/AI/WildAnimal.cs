@@ -41,7 +41,7 @@ public class WildAnimal : Enemy
         Transform player = null;
         if (OverLap(meleeHurtZone, out player, "Player"))
         {
-            transform.LookAt(tragetDetected);
+            transform.LookAt(targetDetected);
             meshAgentComponent.isStopped = true;
             if (hasExplosed == false)
             {
@@ -63,17 +63,17 @@ public class WildAnimal : Enemy
         else
         {
             meshAgentComponent.isStopped = false;
-            meshAgentComponent.SetDestination(tragetDetected.position);
+            meshAgentComponent.SetDestination(targetDetected.position);
             animationHandler.TriggerRunRangedAnimation();
             isAttacking = false;
             meshAgentComponent.speed = runningSpeed;
-            tragetLastPosition = tragetDetected.position;
+            tragetLastPosition = targetDetected.position;
         }
 
         if (OverLap(agroRange) == false)
         {
             currentState = AIState.Searching;
-            tragetDetected = null;
+            targetDetected = null;
         }
     }
 }

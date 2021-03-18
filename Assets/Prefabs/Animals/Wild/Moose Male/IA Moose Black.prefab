@@ -139,10 +139,20 @@ MonoBehaviour:
   currentWayPointIndex: 0
   detectionRange: 7.57
   detectionRangeGizmoColor: {r: 0, g: 0, b: 1, a: 1}
-  tragetDetected: {fileID: 0}
+  targetDetected: {fileID: 0}
   searchingTime: 2
   agroRange: 11.35
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  spawnVfxOn_REF: {fileID: 8653199511406573559, guid: 6a1a7d6bbe79c7a478dc0eb650adde38,
+    type: 3}
+  deathVFX: []
+  spawnVFX:
+  - {fileID: 1286864560048534, guid: a60781ace6ae49347be6710ccaf6e9dd, type: 3}
+  - {fileID: 1706116407311228, guid: 828bdd7ee97687846ae3bd14c3abdec8, type: 3}
+  - {fileID: 1957075435711846, guid: 1b11f3eacf0dce144ae701d97e87fad9, type: 3}
+  isAnimal: 0
+  isZombie: 1
+  isDead: 0
   meleeHurtZone: 2
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   attackCooldown: 0

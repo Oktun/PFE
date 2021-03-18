@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,6 +20,7 @@ public abstract class Enemy : MonoBehaviour {
         Attack,
         Searching,
         GoingToPoint,
+        Death
     }
 
     // State
@@ -35,7 +37,7 @@ public abstract class Enemy : MonoBehaviour {
     [Header("States Stats")]
     [SerializeField] protected float detectionRange = 10f;
     [SerializeField] protected Color detectionRangeGizmoColor = Color.blue;
-    [SerializeField] protected Transform tragetDetected = null;
+    [SerializeField] protected Transform targetDetected = null;
 
     // Searching state variables
     protected Vector3? tragetLastPosition = null;
@@ -51,13 +53,17 @@ public abstract class Enemy : MonoBehaviour {
     [Space]
     [Header("VFX Settings")]
     [SerializeField] protected SpawnVfxOnZombie spawnVfxOn_REF;
-    [SerializeField] protected GameObject deathVFX;
-    [SerializeField] protected List<GameObject> gameObjectVFX = new List<GameObject>();
+    [SerializeField] protected List<GameObject> deathVFX = new List<GameObject>();
+    [SerializeField] protected List<GameObject> spawnVFX = new List<GameObject>();
 
     [Space]
     [Header("Zombies & Animals Def")]
     [SerializeField] protected bool isAnimal = false;
     [SerializeField] protected bool isZombie = true;
+
+    [Space]
+    [Header("IA Death Settings")]
+    [SerializeField] protected bool isDead = false;
 
 
 
@@ -77,17 +83,15 @@ public abstract class Enemy : MonoBehaviour {
     {
         if(isZombie == true)
         {
-            spawnVfxOn_REF.SpawnVFX(new Vector3(transform.position.x, 0, transform.position.z),
-                gameObjectVFX.GetRandomFromList());
+            spawnVfxOn_REF.SpawnVFX(this.transform, spawnVFX.GetRandomFromList());
         }
     }
 
-    protected virtual void OnDisable()
+    public virtual void Disable()
     {
         if(isZombie == true)
         {
-            spawnVfxOn_REF.SpawnVFX(new Vector3(transform.position.x, 0, transform.position.z),
-                deathVFX);
+            spawnVfxOn_REF.SpawnVFX(this.transform, deathVFX.GetRandomFromList(), targetDetected);
         }
     }
 
@@ -138,7 +142,19 @@ public abstract class Enemy : MonoBehaviour {
             case AIState.Searching: Searching(); break;
             case AIState.Patrol: Patrol(); break;
             case AIState.GoingToPoint: GoToPoint(); break;
+            case AIState.Death: IADeath(); break;
         }
+
+        if (isDead == true)
+        {
+            currentState = AIState.Death;
+        }
+    }
+
+    private void IADeath()
+    {
+            meshAgentComponent.isStopped = true;
+            animationHandler.TriggerDeathAnimation();
     }
 
     protected virtual void GoToPoint ()
@@ -148,7 +164,7 @@ public abstract class Enemy : MonoBehaviour {
         meshAgentComponent.speed = runningSpeed;
         meshAgentComponent.isStopped = false;
 
-        if (OverLap(agroRange, out tragetDetected))
+        if (OverLap(agroRange, out targetDetected))
         {
             currentState = AIState.Attack;
         }
@@ -190,13 +206,13 @@ public abstract class Enemy : MonoBehaviour {
         if (hits != null) {
             for (int i = 0; i < hits.Length; i++) {
                 if (hits[i].gameObject.tag == targetTag) {
-                    tragetDetected = hits[i].transform;
+                    targetDetected = hits[i].transform;
                     return true;
                 }
             }
         }
 
-        tragetDetected = null;
+        targetDetected = null;
         return false;
     }
 
@@ -253,7 +269,7 @@ public abstract class Enemy : MonoBehaviour {
         meshAgentComponent.isStopped = true;
         animationHandler.TriggerIdleAnimation();
 
-        if (OverLap(agroRange, out tragetDetected)) {
+        if (OverLap(agroRange, out targetDetected)) {
             currentState = AIState.Attack;
         }
         if (wayPoints.Count != 0)

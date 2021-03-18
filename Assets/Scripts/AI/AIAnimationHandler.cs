@@ -55,4 +55,12 @@ public class AIAnimationHandler : MonoBehaviour
     public void TriggerRunBackAnimaton () {
         animatorReference.SetBool("RunBack", true);
     }
+
+    public void TriggerDeathAnimation()
+    {
+        animatorReference.SetBool("Death", true);
+        animatorReference.SetBool("Walk", false);
+        animatorReference.SetBool("Run", false);
+        animatorReference.SetBool("Attack", false);
+    }
 }
