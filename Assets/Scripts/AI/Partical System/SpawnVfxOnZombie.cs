@@ -7,17 +7,14 @@ public  class SpawnVfxOnZombie : MonoBehaviour
 {
     
 
-    public void SpawnVFX(Transform casterTransform , GameObject particaleObject, Transform playerTransform = null)
+    public void SpawnVFX(Transform casterTransform , GameObject particaleObject, Transform playerTransform = null, bool isDead = false)
     {
         var go = particaleObject;
         GameObject partical = Instantiate(go, casterTransform) as GameObject;
-        //partical.transform.position = pos;
         partical.transform.parent = null;
-        partical.transform.position += Vector3.up;
-        if (playerTransform)
+        if (isDead==true)
         {
-            //partical.transform.LookAt(playerTransform);
-            //partical.transform.rotation = new Quaternion(0, -90, 0, 0);
+            partical.transform.position += Vector3.up;
         }
         Destroy(partical, 2f);
     }

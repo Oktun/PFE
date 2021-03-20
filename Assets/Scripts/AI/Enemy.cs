@@ -9,6 +9,11 @@ public abstract class Enemy : MonoBehaviour {
 
     protected AIAnimationHandler animationHandler = null;
 
+    internal void DealDamage()
+    {
+        
+    }
+
     [Space]
     [Header("Speeds")]
     [SerializeField] protected float walkingSpeed = 1f;
@@ -91,7 +96,7 @@ public abstract class Enemy : MonoBehaviour {
     {
         if(isZombie == true)
         {
-            spawnVfxOn_REF.SpawnVFX(this.transform, deathVFX.GetRandomFromList(), targetDetected);
+            spawnVfxOn_REF.SpawnVFX(this.transform, deathVFX.GetRandomFromList(), targetDetected, true);
         }
     }
 

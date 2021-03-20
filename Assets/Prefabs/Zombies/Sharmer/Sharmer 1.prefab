@@ -137,9 +137,9 @@ GameObject:
   - component: {fileID: 710685248431252857}
   - component: {fileID: 710685248431252856}
   - component: {fileID: 710685248431252807}
-  - component: {fileID: 710685248431252806}
   - component: {fileID: 710685248431252805}
   - component: {fileID: 710685248431252804}
+  - component: {fileID: 2763561999196909790}
   m_Layer: 0
   m_Name: Sharmer 1
   m_TagString: Untagged
@@ -232,19 +232,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &710685248431252806
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710685248431252803}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.6, z: 1}
-  m_Center: {x: 0, y: 1.06, z: 0}
 --- !u!111 &710685248431252805
 Animation:
   m_ObjectHideFlags: 0
@@ -280,7 +267,7 @@ MonoBehaviour:
   currentWayPointIndex: 0
   detectionRange: 7.1
   detectionRangeGizmoColor: {r: 0, g: 0, b: 1, a: 1}
-  tragetDetected: {fileID: 0}
+  targetDetected: {fileID: 0}
   searchingTime: 2
   agroRange: 10.3
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
@@ -294,20 +281,43 @@ MonoBehaviour:
   - {fileID: 1879855837389120, guid: 9d5288040bd507f40b5ac26c11f27540, type: 3}
   isAnimal: 0
   isZombie: 1
+  isDead: 0
   meleeHurtZone: 2
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  attackCooldown: 0
+  damageToDeal: 3
+  attackCooldown: 1
   attackTimer: 0
-  attackDamage: 0
   zombieList:
   - {fileID: 7008761695428274959, guid: ddd94ee7f97bb8b4bb3ae45a1da52a09, type: 3}
   - {fileID: 979189939277705412, guid: 7412026ce29a5c14a8213e33c3938ed4, type: 3}
+  - {fileID: 7685346738275174165, guid: e7e5861484dd39b438e915f4ac54d3f5, type: 3}
+  - {fileID: 7680583354596319119, guid: feca93f626eeda743bf9b17b237833a9, type: 3}
+  - {fileID: 2912469308503759572, guid: 036f8d99458a561468b779430a8339e1, type: 3}
+  - {fileID: 4375239106548543144, guid: 2072ab36fe4358d47b2e4620c5b81bee, type: 3}
+  - {fileID: 5450521049990310762, guid: 2b1c0f4d5ed91894ba35addd3988e3f8, type: 3}
+  - {fileID: 4741838760837284036, guid: f5ec26ff97219da428046bbd802b1b0e, type: 3}
+  - {fileID: 2638168052617074118, guid: 21977ddd1365fcf418250f385e8bd3f3, type: 3}
+  - {fileID: 3714220547490921519, guid: 9a8a0114231011343a6605b530f1540d, type: 3}
   timeBetweenSpawn: 2
   transformsSpawn:
   - {fileID: 710685248053649915}
   - {fileID: 710685249005116688}
   - {fileID: 710685247475213380}
   - {fileID: 710685247887752053}
+--- !u!136 &2763561999196909790
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710685248431252803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.28
+  m_Height: 2.01
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &710685249005116703
 GameObject:
   m_ObjectHideFlags: 0

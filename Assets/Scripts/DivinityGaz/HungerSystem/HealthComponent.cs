@@ -14,6 +14,8 @@ namespace DivinityGaz.HealthSystem
         public float MaxHealth { get { return maxHealth; } }
         public float CurrentHealth { get { return currentHealth; } }
 
+        private void Start() => currentHealth = maxHealth;
+
         public bool TakeDamage (float damageToTake)
         {
             currentHealth -= damageToTake;

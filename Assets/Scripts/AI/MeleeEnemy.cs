@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DivinityGaz.HealthSystem;
 
 public class MeleeEnemy : Enemy {
 
     [Space]
     [SerializeField] private float meleeHurtZone = 2f;
     [SerializeField] private Color meleeHurtZoneGizmoColor = Color.red;
+    [SerializeField] private float damageToDeal = 20f;
 
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackTimer = 0f;
     bool isAttacking = false;
-    [SerializeField] private int attackDamage;
 
     [Header("Zombie Teleporter Settings")]
     [SerializeField] private bool isTeleporter = false;
@@ -44,7 +45,7 @@ public class MeleeEnemy : Enemy {
             if (attackCooldown <= attackTimer) {
                 attackTimer -= attackCooldown;
                 animationHandler.TriggerAttackAnimation(true);
-                //player.GetComponent<PlayerHealth>().healthSystem.Damage(attackDamage, 1);
+                player.GetComponent<HealthComponent>().TakeDamage(damageToDeal);
             } else {
                 animationHandler.TriggerIdleAnimation();
             }

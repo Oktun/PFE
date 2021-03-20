@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DivinityGaz.HealthSystem;
+
 
 public class EnemySharmer : Enemy
 {
@@ -8,11 +10,12 @@ public class EnemySharmer : Enemy
     [Space]
     [SerializeField] private float meleeHurtZone = 2f;
     [SerializeField] private Color meleeHurtZoneGizmoColor = Color.red;
+    [SerializeField] private float damageToDeal = 20f;
+
 
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackTimer = 0f;
     bool isAttacking = false;
-    [SerializeField] private int attackDamage;
 
     [Header("SpawnWalkersSettings")]
     [SerializeField] private List<GameObject> zombieList;
@@ -43,7 +46,7 @@ public class EnemySharmer : Enemy
             {
                 attackTimer -= attackCooldown;
                 animationHandler.TriggerAttackAnimation(true);
-                //player.GetComponent<PlayerHealth>().healthSystem.Damage(attackDamage, 1);
+                player.GetComponent<HealthComponent>().TakeDamage(damageToDeal);
             }
             else
             {

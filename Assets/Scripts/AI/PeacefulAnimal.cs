@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DivinityGaz.HealthSystem;
+
 
 public class PeacefulAnimal : Enemy
 {
@@ -11,7 +13,6 @@ public class PeacefulAnimal : Enemy
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackTimer = 0f;
     bool isAttacking = false;
-    [SerializeField] private int attackDamage;
 
     [Space]
     [Header("Bomber Settings")]

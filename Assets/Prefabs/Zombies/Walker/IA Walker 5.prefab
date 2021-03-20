@@ -109,7 +109,7 @@ MonoBehaviour:
   currentWayPointIndex: 0
   detectionRange: 6.92
   detectionRangeGizmoColor: {r: 0, g: 0, b: 1, a: 1}
-  tragetDetected: {fileID: 0}
+  targetDetected: {fileID: 0}
   searchingTime: 2
   agroRange: 12.03
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
@@ -126,11 +126,12 @@ MonoBehaviour:
   - {fileID: 1879855837389120, guid: 9d5288040bd507f40b5ac26c11f27540, type: 3}
   isAnimal: 0
   isZombie: 1
+  isDead: 0
   meleeHurtZone: 1.25
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  attackCooldown: 0
+  damageToDeal: 1
+  attackCooldown: 1
   attackTimer: 0
-  attackDamage: 0
   isTeleporter: 0
   playerTeleportPosition: {fileID: 0}
 --- !u!54 &2912469308503759570

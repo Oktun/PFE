@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using DivinityGaz.HealthSystem;
+
 
 
 public class EnemyBomber : Enemy
@@ -9,11 +11,12 @@ public class EnemyBomber : Enemy
     [Space]
     [SerializeField] private float meleeHurtZone = 2f;
     [SerializeField] private Color meleeHurtZoneGizmoColor = Color.red;
+    [SerializeField] private float damageToDeal = 20f;
+
 
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackTimer = 0f;
     bool isAttacking = false;
-    [SerializeField] private int attackDamage;
 
     [Space]
     [Header("Bomber Settings")]
@@ -83,7 +86,7 @@ public class EnemyBomber : Enemy
     {
         Vector3 explosionPos = transform.position;
         this.spawnVfxOn_REF.SpawnVFX(this.transform,
-            this.deathVFX.GetRandomFromList(), targetDetected);
+            this.deathVFX.GetRandomFromList(), targetDetected, true);
         transform.gameObject.SetActive(false);
 
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
@@ -94,6 +97,11 @@ public class EnemyBomber : Enemy
             {
                 hit.transform.GetComponent<Enemy>().Disable();
                 hit.gameObject.SetActive(false);
+            }
+
+            if (hit.CompareTag("Player"))
+            {
+                hit.GetComponent<HealthComponent>().TakeDamage(damageToDeal);
             }
         }
     }

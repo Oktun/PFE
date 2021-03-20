@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DivinityGaz.HealthSystem;
+
 
 public class WildAnimal : Enemy
 {
     [Space]
     [SerializeField] private float meleeHurtZone = 2f;
     [SerializeField] private Color meleeHurtZoneGizmoColor = Color.red;
+    [SerializeField] private float damageToDeal = 20f;
+
 
     [SerializeField] private float attackCooldown;
     [SerializeField] private float attackTimer = 0f;
     bool isAttacking = false;
-    [SerializeField] private int attackDamage;
 
     [Space]
     [Header("Bomber Settings")]
@@ -53,6 +56,7 @@ public class WildAnimal : Enemy
             {
                 attackTimer -= attackCooldown;
                 animationHandler.TriggerAttackAnimation(true);
+                player.GetComponent<HealthComponent>().TakeDamage(damageToDeal);
             }
             else
             {
