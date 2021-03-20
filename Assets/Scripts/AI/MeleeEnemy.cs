@@ -39,7 +39,7 @@ public class MeleeEnemy : Enemy {
         Transform player = null;
         if (OverLap(meleeHurtZone, out player)) {
             meshAgentComponent.isStopped = true;
-            transform.LookAt(tragetDetected);
+            transform.LookAt(targetDetected);
 
             if (attackCooldown <= attackTimer) {
                 attackTimer -= attackCooldown;
@@ -51,18 +51,17 @@ public class MeleeEnemy : Enemy {
 
         } else {
             meshAgentComponent.isStopped = false;
-            meshAgentComponent.SetDestination(tragetDetected.position);
+            meshAgentComponent.SetDestination(targetDetected.position);
             animationHandler.TriggerRunRangedAnimation();
             isAttacking = false;
             meshAgentComponent.speed = runningSpeed;
-            tragetLastPosition = tragetDetected.position;
+            tragetLastPosition = targetDetected.position;
             if (isTeleporter)
             {
                 if (hasTeleported)
                 {
                     transform.position = playerTeleportPosition.position;
-                    spawnVfxOn_REF.SpawnVFX(new Vector3(transform.position.x, 0, transform.position.z),
-                        gameObjectVFX.GetRandomFromList());
+                    spawnVfxOn_REF.SpawnVFX(this.transform, spawnVFX.GetRandomFromList());
                     hasTeleported = false;
                 }
             }
@@ -70,7 +69,7 @@ public class MeleeEnemy : Enemy {
 
         if (OverLap(agroRange) == false) {
             currentState = AIState.Searching;
-            tragetDetected = null;
+            targetDetected = null;
             if (isTeleporter)
             {
                 hasTeleported = true;

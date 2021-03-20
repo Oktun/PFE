@@ -122,11 +122,15 @@ MonoBehaviour:
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
   spawnVfxOn_REF: {fileID: 8653199511406573559, guid: 6a1a7d6bbe79c7a478dc0eb650adde38,
     type: 3}
-  deathVFX: {fileID: 0}
-  gameObjectVFX:
-  - {fileID: 1286864560048534, guid: a60781ace6ae49347be6710ccaf6e9dd, type: 3}
-  - {fileID: 1706116407311228, guid: 828bdd7ee97687846ae3bd14c3abdec8, type: 3}
-  - {fileID: 1957075435711846, guid: 1b11f3eacf0dce144ae701d97e87fad9, type: 3}
+  deathVFX:
+  - {fileID: 1377424659350760, guid: f1de78bcb509f9f4f81dd92becbf341c, type: 3}
+  - {fileID: 1022467295468940, guid: 3845c058642164c4aa72204c65011e98, type: 3}
+  - {fileID: 1680937006522702, guid: f5933e79cbb33c14cadcc4d779aa4245, type: 3}
+  - {fileID: 1456060657882760, guid: 7e6767444726b234c868079dec6d7ae0, type: 3}
+  spawnVFX:
+  - {fileID: 1650399826636874, guid: e4b624416f9e0de4fb813e6569d32821, type: 3}
+  - {fileID: 1136491557219650, guid: 49f3607343e22e84c8a64858028be7b1, type: 3}
+  - {fileID: 1879855837389120, guid: 9d5288040bd507f40b5ac26c11f27540, type: 3}
   isAnimal: 0
   isZombie: 1
   meleeHurtZone: 1.25

@@ -69,7 +69,7 @@ Animator:
   m_GameObject: {fileID: 4297023145390669585}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e1f61507af3734e4eb2f4bf1b1214c24, type: 3}
-  m_Controller: {fileID: 9100000, guid: 5251cf47877ff6943a88c6d5bd7328a8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1590b65e68e800a4d8f672cb95d1c27f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -125,10 +125,20 @@ MonoBehaviour:
   currentWayPointIndex: 0
   detectionRange: 9.4
   detectionRangeGizmoColor: {r: 0, g: 0, b: 1, a: 1}
-  tragetDetected: {fileID: 0}
+  targetDetected: {fileID: 0}
   searchingTime: 2
   agroRange: 14.53
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  spawnVfxOn_REF: {fileID: 8653199511406573559, guid: 6a1a7d6bbe79c7a478dc0eb650adde38,
+    type: 3}
+  deathVFX: []
+  spawnVFX:
+  - {fileID: 1650399826636874, guid: e4b624416f9e0de4fb813e6569d32821, type: 3}
+  - {fileID: 1136491557219650, guid: 49f3607343e22e84c8a64858028be7b1, type: 3}
+  - {fileID: 1879855837389120, guid: 9d5288040bd507f40b5ac26c11f27540, type: 3}
+  isAnimal: 0
+  isZombie: 1
+  isDead: 0
   meleeHurtZone: 2
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   attackCooldown: 0

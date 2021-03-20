@@ -43,14 +43,14 @@ public class PeacefulAnimal : Enemy
         if (OverLap(agroRange) == false)
         {
             currentState = AIState.Patrol;
-            tragetDetected = null;
+            targetDetected = null;
         }
 
     }
 
     private void Flee()
     {
-        Vector3 directionToPlayer = transform.position - tragetDetected.position;
+        Vector3 directionToPlayer = transform.position - targetDetected.position;
         Vector3 fleePosition = transform.position + directionToPlayer;
         meshAgentComponent.SetDestination(fleePosition);
         meshAgentComponent.isStopped = false;

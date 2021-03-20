@@ -37,7 +37,7 @@ public class EnemySharmer : Enemy
         if (OverLap(meleeHurtZone, out player, "Player"))
         {
             meshAgentComponent.isStopped = true;
-            transform.LookAt(tragetDetected);
+            transform.LookAt(targetDetected);
 
             if (attackCooldown <= attackTimer)
             {
@@ -54,11 +54,11 @@ public class EnemySharmer : Enemy
         else
         {
             meshAgentComponent.isStopped = false;
-            meshAgentComponent.SetDestination(tragetDetected.position);
+            meshAgentComponent.SetDestination(targetDetected.position);
             animationHandler.TriggerRunRangedAnimation();
             isAttacking = false;
             meshAgentComponent.speed = runningSpeed;
-            tragetLastPosition = tragetDetected.position;
+            tragetLastPosition = targetDetected.position;
             //Spawn Walkers
             SpawnWalkers();
 
@@ -67,7 +67,7 @@ public class EnemySharmer : Enemy
         if (OverLap(agroRange) == false)
         {
             currentState = AIState.Searching;
-            tragetDetected = null;
+            targetDetected = null;
         }
     }
 

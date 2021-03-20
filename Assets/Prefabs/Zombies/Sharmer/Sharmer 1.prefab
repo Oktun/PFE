@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 710685248431252805}
   - component: {fileID: 710685248431252804}
   m_Layer: 0
-  m_Name: Sharmer
+  m_Name: Sharmer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,6 +284,16 @@ MonoBehaviour:
   searchingTime: 2
   agroRange: 10.3
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
+  spawnVfxOn_REF: {fileID: 8653199511406573559, guid: 6a1a7d6bbe79c7a478dc0eb650adde38,
+    type: 3}
+  deathVFX:
+  - {fileID: 1126160920730200, guid: 7ae1d86c2db118940a3a5a8f8e59a43d, type: 3}
+  spawnVFX:
+  - {fileID: 1650399826636874, guid: e4b624416f9e0de4fb813e6569d32821, type: 3}
+  - {fileID: 1136491557219650, guid: 49f3607343e22e84c8a64858028be7b1, type: 3}
+  - {fileID: 1879855837389120, guid: 9d5288040bd507f40b5ac26c11f27540, type: 3}
+  isAnimal: 0
+  isZombie: 1
   meleeHurtZone: 2
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   attackCooldown: 0
