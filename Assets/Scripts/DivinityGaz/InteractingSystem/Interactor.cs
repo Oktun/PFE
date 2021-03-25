@@ -1,56 +1,48 @@
-﻿using UnityEngine;
+﻿using DivinityGaz.InventorySystem;
+using UnityEngine;
 
 namespace DivinityGaz.Interactables
 {
     public class Interactor : MonoBehaviour
     {
-        [SerializeField] private KeyCode interactionKey = KeyCode.E;
-        [SerializeField] private float interactionRange = 8f;
-        [SerializeField] private LayerMask interactionMask;
-        [SerializeField] private Color pickUpRangeGizmosColor = Color.green;
-        [Space]
-        [SerializeField] private Camera mainCamera = null;
-
+        [SerializeField] private GameObject playersGameObject = null;
         private IInteractable currentInteractable = null;
 
-        private void Update ()
-        {
-            CheckInteraction();
-            GetInteractable();
-        }
+        private void Update () => CheckInteraction();
 
         private void CheckInteraction ()
         {
-            if (Input.GetKeyDown(interactionKey))
+            if (Input.GetKeyDown(InputManager.IM.interactionKey))
             {
-                currentInteractable?.Interact(gameObject);
+                currentInteractable?.Interact(playersGameObject);
             }
         }
 
-        private void GetInteractable ()
+        private void OnTriggerEnter (Collider other)
         {
-            Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(cameraRay, out RaycastHit hit, interactionRange, interactionMask.value))
+            if (other.TryGetComponent(out IInteractable interactable))
             {
-                if (hit.transform.TryGetComponent(out IInteractable interactable))
-                {
-                    if (currentInteractable != interactable)
-                    {
-                        currentInteractable = interactable;
-                    }
-                    currentInteractable.OnEnterInteract();
-                }
-            } else
-            {
-                currentInteractable?.OnExitInteract();
+                currentInteractable = interactable;
+                currentInteractable.OnEnterInteract();
             }
         }
 
-        private void OnDrawGizmos ()
+        private void OnTriggerStay (Collider other)
         {
-            Gizmos.color = pickUpRangeGizmosColor;
-            Gizmos.DrawWireSphere(this.transform.position, interactionRange);
+            if (other.TryGetComponent(out IInteractable interactable) && currentInteractable != null)
+            {
+                currentInteractable = interactable;
+                currentInteractable.OnEnterInteract();
+            }
+        }
+
+        private void OnTriggerExit (Collider other)
+        {
+            if (other.TryGetComponent(out IInteractable interactable))
+            {
+                currentInteractable.OnExitInteract();
+                currentInteractable = null;
+            }
         }
     }
 }

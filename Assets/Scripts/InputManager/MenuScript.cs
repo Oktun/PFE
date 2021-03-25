@@ -120,10 +120,10 @@ public class MenuScript : MonoBehaviour
             buttonText.text = InputManager.IM.inventoryKey.ToString(); //set button text to new key
             PlayerPrefs.SetString("inventoryKey", InputManager.IM.inventoryKey.ToString()); //save new key to playerprefs
             break;
-            case "mKey":
-            InputManager.IM.map = newKey; //set jump to new keycode
-            buttonText.text = InputManager.IM.map.ToString(); //set button text to new key
-            PlayerPrefs.SetString("mapKey", InputManager.IM.map.ToString()); //save new key to playerprefs
+            case "interactionKey":
+            InputManager.IM.interactionKey = newKey; //set jump to new keycode
+            buttonText.text = InputManager.IM.interactionKey.ToString(); //set button text to new key
+            PlayerPrefs.SetString("interactionKey", InputManager.IM.interactionKey.ToString()); //save new key to playerprefs
             break;
             case "hKey":
             InputManager.IM.skillTree = newKey; //set jump to new keycode

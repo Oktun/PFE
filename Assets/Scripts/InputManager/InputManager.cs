@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     //Create Keycodes that will be associated with each of our commands.
     //These can be accessed by any other script in our game
     public KeyCode inventoryKey { get; set; } = KeyCode.I;
-    public KeyCode map { get; set; } = KeyCode.M;
+    public KeyCode interactionKey { get; set; } = KeyCode.E;
     public KeyCode skillTree { get; set; }
     public KeyCode hand { get; set; }
     public KeyCode axe { get; set; }
@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
         axe = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("axeKey", "2"));
         bow = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("bowKey", "3"));
         skillTree = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("skillKey", "H"));
-        map = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("mapKey", "M"));
+        interactionKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interactionKey", "M"));
         forward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "Z"));
         backward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
         left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "Q"));
@@ -65,7 +65,7 @@ public class InputManager : MonoBehaviour
             case "hand": actionKey = hand.ToString(); break;
             case "skillTree": actionKey = skillTree.ToString(); break;
             case "inventory": actionKey = inventoryKey.ToString(); break;
-            case "map": actionKey = map.ToString(); break;
+            case "interactionKey": actionKey = interactionKey.ToString(); break;
         }
 
         return actionKey;

@@ -43,7 +43,6 @@ namespace DivinityGaz.HungerSystem
                 currentPercentage -= dropRate + dropRate * currentEffectiveness;
 
                 if (currentPercentage < 0) { currentPercentage = 0; }
-                Debug.Log(currentPercentage);
 
                 OnStatsChange?.Invoke(this);
             }
