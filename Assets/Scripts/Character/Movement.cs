@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
         public string pull = "pullString";
         public string fire = "fire";
         public string axeAttack = "attackD";
-        public string fistAttack = "fist";
+        public string fistAttack = "attackFist";
     }
     [SerializeField] public AnimationStrings animStrings; 
 

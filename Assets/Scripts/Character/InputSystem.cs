@@ -174,7 +174,7 @@ public class InputSystem : MonoBehaviour
         } else
         {
             AxeAttack();
-            //FistAttack();
+            FistAttack();
             bowScript.RemoveCrossHair();
             DisableArrow();
             Release();

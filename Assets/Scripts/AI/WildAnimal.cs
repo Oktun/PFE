@@ -44,7 +44,9 @@ public class WildAnimal : Enemy
         Transform player = null;
         if (OverLap(meleeHurtZone, out player, "Player"))
         {
-            transform.LookAt(targetDetected);
+            Vector3 vectorLookPos = new Vector3(targetDetected.position.x, transform.position.y,
+                targetDetected.position.z);
+            transform.LookAt(vectorLookPos);
             meshAgentComponent.isStopped = true;
             if (hasExplosed == false)
             {

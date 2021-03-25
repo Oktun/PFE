@@ -40,7 +40,9 @@ public class EnemySharmer : Enemy
         if (OverLap(meleeHurtZone, out player, "Player"))
         {
             meshAgentComponent.isStopped = true;
-            transform.LookAt(targetDetected);
+            Vector3 vectorLookPos = new Vector3(targetDetected.position.x, transform.position.y,
+                targetDetected.position.z);
+            transform.LookAt(vectorLookPos);
 
             if (attackCooldown <= attackTimer)
             {
