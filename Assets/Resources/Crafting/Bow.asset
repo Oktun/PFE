@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   craftingDuration: 20
-  ingredients: []
+  ingredients:
+  - Item: {fileID: 11400000, guid: 82119c8c75299b9439e4122fb0ae4eb4, type: 2}
+    Quantity: 1
+  - Item: {fileID: 11400000, guid: 32e88081d754e0147986ce555f0c6684, type: 2}
+    Quantity: 2
   finalItem:
-    Item: {fileID: 0}
-    Quantity: 0
+    Item: {fileID: 11400000, guid: f59946567693fc94ebcfffe6d7f49e09, type: 2}
+    Quantity: 1

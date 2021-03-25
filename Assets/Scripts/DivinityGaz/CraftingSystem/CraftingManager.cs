@@ -1,9 +1,8 @@
 ﻿using DivinityGaz.InventorySystem;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DivinityGaz.CraftingSystem 
+namespace DivinityGaz.CraftingSystem
 {
     public class CraftingManager : MonoBehaviour
     {
@@ -14,7 +13,7 @@ namespace DivinityGaz.CraftingSystem
 
             public CraftingQueue (CraftingRecipe recipe)
             {
-                timer = 0f;
+                timer = recipe.CraftingDuration;
                 this.recipe = recipe;
             }
 
@@ -30,32 +29,38 @@ namespace DivinityGaz.CraftingSystem
         }
 
         [SerializeField] private Inventory storage = null;
-        [SerializeField] private List<CraftingQueue> craftingQueue = new List<CraftingQueue>();
+        [SerializeField] private Transform craftableInProgressTemplate = null;
+        [SerializeField] private Transform craftableInProgressContainer = null;
 
-        private void Update ()
-        {
-            for (int i = 0; i < craftingQueue.Count; i++)
-            {
-                if (craftingQueue[i].IncreaseTimer())
-                {
-                    CraftCompleted(craftingQueue[i].recipe);
-                }
-            }
-        }
+        private List<CraftingQueue> craftingQueue = new List<CraftingQueue>();
 
-        private void CraftCompleted(CraftingRecipe recipe)
+        public void CraftCompleted (CraftingRecipe recipe)
         {
             storage.AddItem(recipe.FinalItem);
         }
 
         public void StartCraft (CraftingRecipe recipe)
         {
-            
+            Transform spawnedCraftableInProgress = Instantiate(craftableInProgressTemplate, craftableInProgressContainer);
+
+            spawnedCraftableInProgress.GetComponent<CraftingInProgress>().Set(this, recipe, craftingQueue.Count);
+
+            craftingQueue.Add(new CraftingQueue(recipe));
+
+            for (int i = 0; i < recipe.Ingredients.Count; i++)
+            {
+                storage.RemoveItem(recipe.Ingredients[i]);
+            }
         }
 
-        private void CancelCraft (int index)
+        public void CancelCraft (int index) 
         {
+            for (int i = 0; i < craftingQueue[index].recipe.Ingredients.Count; i++)
+            {
+                storage.AddItem(craftingQueue[index].recipe.Ingredients[i]);
+            }
 
+            craftingQueue.RemoveAt(index); 
         }
 
         public bool IsAbleToCraft (CraftingRecipe recipe)
@@ -68,8 +73,7 @@ namespace DivinityGaz.CraftingSystem
                     {
                         return false;
                     }
-                } 
-                else
+                } else
                 {
                     return false;
                 }

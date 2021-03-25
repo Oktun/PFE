@@ -19,6 +19,7 @@ namespace DivinityGaz.CraftingSystem
 
         [Space]
         [SerializeField] private Button craftButton = null;
+        [SerializeField] private Button button = null;
 
         public void Start ()
         {
@@ -43,7 +44,9 @@ namespace DivinityGaz.CraftingSystem
 
         public void OnItemsUpdated ()
         {
-            craftButton.interactable = craftingManager.IsAbleToCraft(this.recipe);
+            bool isAble = craftingManager.IsAbleToCraft(this.recipe);
+            button.interactable = isAble;
+            craftButton.interactable = isAble;
         }
 
         private void OnEnable () => craftButton.onClick.AddListener(OnClick);
