@@ -31,7 +31,7 @@ public class MeleeEnemy : Enemy {
         base.OnDrawGizmos();
 
         Gizmos.color = meleeHurtZoneGizmoColor;
-        Gizmos.DrawWireSphere(this.transform.position, meleeHurtZone);
+        Gizmos.DrawWireSphere(this.transform.position + Vector3.up, meleeHurtZone);
     }
 
     protected override void AttackState () {
@@ -49,7 +49,7 @@ public class MeleeEnemy : Enemy {
                 animationHandler.TriggerAttackAnimation(true);
                 player.GetComponent<HealthComponent>().TakeDamage(damageToDeal);
             } else {
-                animationHandler.TriggerIdleAnimation();
+                //animationHandler.TriggerIdleAnimation();
             }
 
         } else {

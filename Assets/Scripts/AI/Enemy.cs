@@ -102,9 +102,14 @@ public abstract class Enemy : MonoBehaviour {
 
     private void Start()
     {
+        SetIANDestinationNav();
+    }
+
+    public void SetIANDestinationNav()
+    {
         if (wayPoints.Count < 2)
         {
-            int spawnPointsCount = Random.Range(3, 10);
+            int spawnPointsCount = Random.Range(6, 14);
             float range = agroRange * 2;
 
             for (int i = 0; i < spawnPointsCount; i++)
@@ -176,7 +181,7 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     protected bool OverLap (float radius, string tagtoCheck = "Player") {
-        Collider[] hits = Physics.OverlapSphere(this.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(this.transform.position + Vector3.up, radius);
 
         if (hits != null) {
             for (int i = 0; i < hits.Length; i++) {
@@ -190,7 +195,7 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     protected bool OverLap (float radius, out Transform hit, string tagtoCheck = "Player") {
-        Collider[] hits = Physics.OverlapSphere(this.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(this.transform.position + Vector3.up, radius);
 
         if (hits != null) {
             for (int i = 0; i < hits.Length; i++) {
@@ -206,7 +211,7 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     protected bool CheckIfTargetInRange (string targetTag = "Player") {
-        Collider[] hits = Physics.OverlapSphere(this.transform.position, detectionRange);
+        Collider[] hits = Physics.OverlapSphere(this.transform.position + Vector3.up, detectionRange);
 
         if (hits != null) {
             for (int i = 0; i < hits.Length; i++) {
@@ -223,10 +228,10 @@ public abstract class Enemy : MonoBehaviour {
 
     protected virtual void OnDrawGizmos () {
         Gizmos.color = detectionRangeGizmoColor;
-        Gizmos.DrawWireSphere(this.transform.position, detectionRange);
+        Gizmos.DrawWireSphere(this.transform.position + Vector3.up, detectionRange);
 
         Gizmos.color = agroRangeGizmoColor;
-        Gizmos.DrawWireSphere(this.transform.position, agroRange);
+        Gizmos.DrawWireSphere(this.transform.position + Vector3.up, agroRange);
     }
 
     protected IEnumerator SearchingRoutine () {

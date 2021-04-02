@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c5145dba6ab5142b6953488c3dc31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 1
-  runningSpeed: 2.5
+  walkingSpeed: 1.4
+  runningSpeed: 6
   currentState: 0
   wayPoints: []
   currentWayPointIndex: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   detectionRangeGizmoColor: {r: 0, g: 0, b: 1, a: 1}
   targetDetected: {fileID: 0}
   searchingTime: 2
-  agroRange: 14.53
+  agroRange: 28
   agroRangeGizmoColor: {r: 0, g: 1, b: 1, a: 1}
   spawnVfxOn_REF: {fileID: 8653199511406573559, guid: 6a1a7d6bbe79c7a478dc0eb650adde38,
     type: 3}
@@ -143,7 +143,6 @@ MonoBehaviour:
   meleeHurtZoneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   attackCooldown: 0
   attackTimer: 0
-  attackDamage: 0
   radius: 5
   power: 10
   hasExplosed: 0

@@ -38,6 +38,10 @@ public class PeacefulAnimal : Enemy
     protected override void AttackState()
     {
         Flee();
+        //Exprematation
+        currentWayPointIndex++;
+        currentWayPointIndex %= wayPoints.Count;
+        //end
         meshAgentComponent.speed = runningSpeed;
         animationHandler.TriggerRunRangedAnimation();
 
