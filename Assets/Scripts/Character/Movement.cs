@@ -46,4 +46,9 @@ public class Movement : MonoBehaviour
     public void CharacterAttackWithAxe(bool attackAxe) => anim.SetBool(animStrings.axeAttack, attackAxe);
 
     public void CharacterFistAttack(bool fistAttack) => anim.SetBool(animStrings.fistAttack, fistAttack); 
+
+    public void CharacterMining(string animationKeyString, bool state)
+    {
+        anim.SetBool(animationKeyString, state);
+    }
 }

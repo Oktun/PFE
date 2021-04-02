@@ -8,6 +8,8 @@ namespace DivinityGaz.Interactables
         [SerializeField] private GameObject playersGameObject = null;
         private IInteractable currentInteractable = null;
 
+        public bool isInteracting = false;
+
         private void Update () => CheckInteraction();
 
         private void CheckInteraction ()
@@ -29,7 +31,7 @@ namespace DivinityGaz.Interactables
 
         private void OnTriggerStay (Collider other)
         {
-            if (other.TryGetComponent(out IInteractable interactable) && currentInteractable != null)
+            if (other.TryGetComponent(out IInteractable interactable) && currentInteractable != null && currentInteractable != interactable)
             {
                 currentInteractable = interactable;
                 currentInteractable.OnEnterInteract();

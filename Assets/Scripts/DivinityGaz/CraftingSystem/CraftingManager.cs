@@ -6,7 +6,7 @@ namespace DivinityGaz.CraftingSystem
 {
     public class CraftingManager : MonoBehaviour
     {
-        private struct CraftingQueue
+        private class CraftingQueue
         {
             public CraftingRecipe recipe;
             public float timer;

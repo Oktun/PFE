@@ -97,7 +97,7 @@ public class InputSystem : MonoBehaviour
         bow
     }
 
-
+    public void StopMoving () => inputVector = Vector2.zero;
 
     void Start ()
     {
@@ -395,11 +395,14 @@ public class InputSystem : MonoBehaviour
 
     private void FistAttack ()
     {
+        if (gameManager.IsAbleToMove == false) { return; }
+
         if (equipedSlot == 0)
         {
             if (Input.GetButton(input.fire))
+            {
                 moveScript.CharacterFistAttack(true);
-            //Attack withFist animation
+            }
         }
     }
     #endregion
